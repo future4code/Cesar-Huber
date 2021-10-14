@@ -100,3 +100,54 @@ while (n < arrayOriginal.length) {
 }
 
 console.log(`O maior número do array é ${maior} e o menor númeo é ${menor}`)
+
+// ----------------------------------------- //
+// --- DESAFIOS ---------------------------- //
+// ----------------------------------------- //
+
+// 1. Jogo adivinhação de números entre 2 jogadores
+const numero = Number(prompt(`Para iniciar o jogo, informe um número`))
+console.log(`Vamos jogar!`)
+
+let numeroChutado = Number(prompt(`Chute um número`))
+let i = 1
+while (numeroChutado !== numero) {
+    console.log(`O número chutado foi: ${numeroChutado}`)
+    if (numeroChutado > numero) {
+        console.log(`Errrrrrou... é menor que isso`)
+        numeroChutado = Number(prompt(`Chute outro número. Menor dessa vez.`))
+    }
+    else {
+        console.log(`Errrrrrou... é maior que isso`)
+        numeroChutado = Number(prompt(`Chute outro número. Maior dessa vez.`))
+    }
+    i++
+}
+
+console.log(`Acertou!!! Era mesmo o número ${numero}`)
+console.log(`O número de tentativas foi: ${i}`)
+
+// 2. mesmo jogo, mas 1P, vs PC
+const numero = Math.floor((Math.random() * 100) + 1)
+console.log(`Vamos jogar! O computador já escolheu um número aleatório entre 1 e 100 e você deve adivinhá-lo.`)
+alert(`Vamos jogar! O computador já escolheu um número aleatório entre 1 e 100 e você deve adivinhá-lo.`)
+
+let numeroChutado = Number(prompt(`Chute um número`))
+let i = 1
+while (numeroChutado !== numero) {
+    console.log(`O número chutado foi: ${numeroChutado}`)
+    if (numeroChutado > numero) {
+        console.log(`Errrrrrou... é menor que isso`)
+        numeroChutado = Number(prompt(`Chute outro número. Menor dessa vez.`))
+    }
+    else {
+        console.log(`Errrrrrou... é maior que isso`)
+        numeroChutado = Number(prompt(`Chute outro número. Maior dessa vez.`))
+    }
+    i++
+}
+
+alert(`Acertou!!! Era mesmo o número ${numero}.
+O número de tentativas foi: ${i}`)
+console.log(`Acertou!!! Era mesmo o número ${numero}`)
+console.log(`O número de tentativas foi: ${i}`)
