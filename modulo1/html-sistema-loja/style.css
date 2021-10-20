@@ -1,0 +1,212 @@
+*{
+    background-color: rgb(226, 219, 219);
+    font-family: 'Josefin Sans';
+}
+
+body{
+    min-height:100vh; 
+    margin:0; 
+    position:relative;
+}
+
+body {
+    position: relative;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 50px; /* Set same as footer's height */
+}
+
+.header-parent{
+    width: 100% vw;
+    height: 100px;
+    background-color: rgb(141, 184, 184);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.header-child{
+    margin: 10px, 10px, 10px, 10px;
+    padding-top: 10px;
+    background-color: inherit;
+}
+
+.line1{
+    height: 2px;
+    background-color: rgb(74, 73, 75);
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.menu-parent{
+    width: 100% vw;
+    height: 30px;
+    text-align: center;
+    background-color: lightskyblue;
+    padding-top: 15px;
+}
+
+.menu-child{
+    text-align: center;
+    font-size: 16pt;
+    background-color: inherit;
+}
+
+.line2{
+    border-left: 1px solid rgb(3, 80, 80);
+    height: 100%;
+    margin-left: 10px;
+    margin-right: 7px;
+    background-color: none;
+}
+
+a:link{
+    text-decoration: none;
+    color:darkred;
+}
+
+a:visited{
+    color:steelblue;
+}
+
+a:hover{
+    color:rgb(3, 80, 80);
+}
+
+p{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h1{
+    margin-bottom: 10px;
+}
+
+.corpo-informacoes{
+    width: 100% vw;
+    padding-top: 40px;
+    font-size: 14pt;
+    text-align: center;
+    line-height: 150%;
+}
+
+#geek{
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: whitesmoke;
+    background-color: dodgerblue;
+    font-size: 110%;
+}
+
+footer{
+    position: absolute;
+    bottom: 50px;
+    left: 10px;
+    width: 100%;
+    height: 50px;
+}
+
+.redes-sociais{
+    width: 30px;
+    height: 30px;
+}
+
+/* Página de Controle de Estoque */
+
+h2{
+    font-size: 20pt;
+}
+
+.margem-esquerda{
+    padding-left: 20px;
+}
+
+img{
+    width: 80px;
+    height: 80px;
+}
+
+table{
+    column-width: 80pt;
+}
+
+th{
+    border: 2px solid black;
+    padding: 15px;
+    text-align: left;
+    font-size: 14pt;
+    line-height: 18pt;
+    word-wrap: break-word;
+    background-color:lightskyblue;
+}
+
+td{
+    border: 1px solid black;
+    padding: 15px;
+    text-align: left;
+    font-size: 14pt;
+}
+
+/* Página de Adição de Produtos */
+
+.line3{
+    height: 1px;
+    background-color: rgb(74, 73, 75);
+    margin-bottom: 7px;
+}
+
+form{
+    line-height: 150%;
+    width: 360px;
+}
+
+input{
+    border: 1px solid black;
+    float: right;
+    width: 180px;
+    background-color: whitesmoke;
+}
+
+label{
+    font-size: 12pt;
+}
+
+button{
+    margin-top: 15px;
+    height: 18pt;
+    font-size: 14pt;
+    background-color: rgb(141, 184, 184);
+}
+
+/* Página de Funcionários */
+
+.ul-parent {
+    width: 250px;
+    height: 80px;
+    list-style-type: none;
+}
+
+.ul-child {
+    width: 250px;
+    height: 80px;
+    list-style-type: none;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+/* Página de Venda */
+
+select{
+    border: 1px solid black;
+    float: right;
+    width: 180px;
+    background-color: whitesmoke;
+    color: black;
+}
