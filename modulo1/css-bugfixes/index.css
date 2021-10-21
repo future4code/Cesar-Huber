@@ -52,7 +52,7 @@ div>p:first-child {
 }
 
 .container {
-    height: 500px;
+    height: 380px;
     text-align: center;
 }
 
@@ -73,20 +73,27 @@ div>p:first-child {
 }
 
 #alinhamento-dentro-do-container {
-    padding-top: 50px;
+    padding-top: 80px;
 }
 
-#container-de-descricao>ol {
-    padding: 15px 0px;
+#alinhamento-filhos{
+    padding-top: 20px;
 }
+
+/* #container-de-descricao>ol {
+    padding: 15px 0px;
+} */
 
 #container-para-comprar {
+    border: 2px solid black;
     background-color: #e7eb90;
 }
 
 #container-para-comprar>p {
+    border: 2px solid black;
     color: #c44f00;
-    padding: 100px 0;
+    padding-top: 40px;
+    margin-top: 40px;
     font-size: 60px;
 }
 
@@ -102,9 +109,14 @@ div:last-child {
     text-align: center;
 }
 
+#bloco-tabela{
+    width: 100vw;
+}
+
 table {
     width: 60%;
     text-align: center;
+    margin: 0 auto;
 }
 
 table img{
@@ -145,6 +157,11 @@ td button {
     width: 500px;
 }
 
+#container-back-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
 #back-button {
     background-color: white;
     width: 100px;
@@ -161,4 +178,10 @@ td button {
 
 #back-button:active {
     color: white;
+}
+
+ol{
+    width: 240px;
+    list-style-type: decimal;
+    margin: 0 auto;
 }
