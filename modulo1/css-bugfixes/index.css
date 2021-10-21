@@ -21,9 +21,9 @@ input {
     width: 500px;
 }
 
-button:focus {
+/* button:focus {
     color: white;
-}
+} */
 
 /* img {
     width: 100px;
@@ -119,6 +119,14 @@ td button {
     color: black;
 }
 
+.botao-comprar:hover{
+    background-color: #c0ab4b;
+}
+
+.botao-comprar:active{
+    color: white;
+}
+
 .container-do-search {
     margin-top: 20px;
     height: 100px;
@@ -128,7 +136,6 @@ td button {
     width: 20px;
     height: 20px;
 }
-
 
 #back-button {
     background-color: white;
@@ -142,4 +149,8 @@ td button {
 
 #back-button:hover {
     background-color: #635a3d
+}
+
+#back-button:active {
+    color: white;
 }
