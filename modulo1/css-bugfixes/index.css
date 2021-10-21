@@ -71,6 +71,10 @@ div img {
     color: white;
 }
 
+#alinhamento-dentro-do-container {
+    padding-top: 50px;
+}
+
 #container-de-descricao>ol {
     padding: 15px 0px;
 }
