@@ -16,10 +16,10 @@ h2 {
     text-align: center;
 }
 
-input {
+/* input {
     height: 20px;
     width: 500px;
-}
+} */
 
 /* button:focus {
     color: white;
@@ -135,6 +135,13 @@ td button {
 .container-do-search img{
     width: 20px;
     height: 20px;
+}
+
+.container-do-search input{
+    border: none;
+    border-bottom: 2px solid black;
+    height: 20px;
+    width: 500px;
 }
 
 #back-button {
