@@ -1,0 +1,191 @@
+/** 
+  *
+  *  ESTILOS GERAIS 
+  *
+  **/
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Roboto;
+}
+
+h2 {
+    background-color: #fe7e02;
+    padding: 10px 5px 10px 5px;
+    color: white;
+    text-align: center;
+}
+
+/* input {
+    height: 20px;
+    width: 500px;
+} */
+
+/* button:focus {
+    color: white;
+} */
+
+/* img {
+    width: 100px;
+} */
+
+/* div>p:first-child {
+    display: inline;
+} */
+
+/* div img {
+    background: black;
+} */
+
+.botao-amarelo {
+    background-color: #ffaf43;
+    width: 250px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+}
+
+.botao-amarelo:hover {
+    background-color: #c44f00;
+}
+
+.container {
+    height: 380px;
+    text-align: center;
+}
+
+.icone {
+    height: 15px;
+}
+
+.icone:hover{
+    opacity: 50%;
+}
+
+.icone:active {
+    opacity: 100%;
+}
+
+/** 
+  *
+  *  ESTILOS HOME 
+  *
+  **/
+
+#container-de-descricao {
+    background-color: #2274a5;
+    color: white;
+}
+
+#alinhamento-dentro-do-container {
+    padding-top: 80px;
+}
+
+#alinhamento-filhos{
+    padding-top: 20px;
+}
+
+/* #container-de-descricao>ol {
+    padding: 15px 0px;
+} */
+
+#container-para-comprar {
+    background-color: #e7eb90;
+}
+
+#container-para-comprar>p {
+    color: #c44f00;
+    padding-top: 40px;
+    font-size: 60px;
+}
+
+
+/**
+  *
+  *  ESTILOS COMPRAR 
+  *
+  **/
+
+div:nth-child(2),
+div:last-child {
+    text-align: center;
+}
+
+#bloco-tabela{
+    width: 100vw;
+}
+
+table {
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+table img{
+    height: 30px;
+    width: 30px;
+}
+
+td button {
+    background-color: #fadf63;
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    color: black;
+}
+
+.botao-comprar:hover{
+    background-color: #c0ab4b;
+}
+
+.botao-comprar:active{
+    color: white;
+}
+
+.container-do-search {
+    margin-top: 20px;
+    height: 100px;
+}
+
+.container-do-search img{
+    width: 20px;
+    height: 20px;
+}
+
+.container-do-search input{
+    border: none;
+    border-bottom: 2px solid black;
+    height: 20px;
+    width: 500px;
+}
+
+#container-back-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#back-button {
+    background-color: white;
+    width: 100px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 10px;
+    color: black;
+}
+
+#back-button:hover {
+    background-color: #635a3d
+}
+
+#back-button:active {
+    color: white;
+}
+
+ol{
+    width: 240px;
+    list-style-type: decimal;
+    margin: 0 auto;
+}
