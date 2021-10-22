@@ -5,26 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="img/favicon.ico" />
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300&display=swap" rel="stylesheet">
     <title>Funcionários</title>
 </head>
 <body>
-    <div>
-        <p><strong><em>CGS</em></strong></p>
-    </div>
-    
-    <div>
-        <a href="index.html">Página Inicial</a>
-        <a href="ctrl-estoque.html">Controle de Estoque</a>
-        <a href="add-produto.html">Adicionar Produto</a>
-        <a href="funcionarios.html">Funcionários</a>
+    <div class="header-parent">
+        <h1 class="header-child">Bem-vind@ à <em class="header-child">CGS</em>!</h1>
+        <div class="line1"></div>
+        <p class="header-child">Ceh's Geek Store | Variedade Geek</p>
     </div>
 
-    <h2>Funcionários</h2>
+    <div class="menu-parent">
+        <a class="menu-child" href="index.html">Página Inicial</a><span class="line2"></span>
+        <a class="menu-child" href="ctrl-estoque.html">Controle de Estoque</a><span class="line2"></span>
+        <a class="menu-child" href="add-produto.html">Adicionar Produto</a><span class="line2"></span>
+        <a class="menu-child" href="funcionarios.html">Funcionários</a><span class="line2"></span>
+        <a class="menu-child" href="pg-venda.html">Venda</a><span class="line2"></span>
+        <a class="menu-child" href="pg-hist-vendas.html">Histórico de Vendas</a>
+    </div>
+
+    <h2 class="margem-esquerda">Funcionários</h2>
     <!-- Crie uma lista de funcionários usando as tags que você aprendeu hoje abaixo \/ -->
-    <ul>
-        <li>Anabelle</li>
-        <li>Baltimore</li>
-        <li>Constantine</li>
+    <ul class="ul-parent">
+        <li class="ul-child"><img src="img/avatar1.png" alt="avatar Anabelle">Anabelle</li>
+        <li class="ul-child"><img src="img/avatar3.png" alt="avatar Baltimore">Baltimore</li>
+        <li class="ul-child"><img src="img/avatar2.png" alt="avatar Constantine">Constantine</li>
     </ul>
         
 </body>

@@ -5,34 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300&display=swap" rel="stylesheet">
     <title>Ceh's Geek Store</title>
 </head>
 <body>
-    <div>
-        <h1>Bem-vind@ à <em>CGS</em>!</h1>
-        <p>Ceh's Geek Store | Variedade Geek</p>
+    <div class="header-parent">
+        <h1 class="header-child">Bem-vind@ à <em class="header-child">CGS</em>!</h1>
+        <div class="line1"></div>
+        <p class="header-child">Ceh's Geek Store | Variedade Geek</p>
     </div>
 
-    <div>
-        <a href="index.html">Página Inicial</a>
-        <a href="ctrl-estoque.html">Controle de Estoque</a>
-        <a href="add-produto.html">Adicionar Produto</a>
-        <a href="funcionarios.html">Funcionários</a>
+    <div class="menu-parent">
+        <a class="menu-child" href="index.html">Página Inicial</a><span class="line2"></span>
+        <a class="menu-child" href="ctrl-estoque.html">Controle de Estoque</a><span class="line2"></span>
+        <a class="menu-child" href="add-produto.html">Adicionar Produto</a><span class="line2"></span>
+        <a class="menu-child" href="funcionarios.html">Funcionários</a><span class="line2"></span>
+        <a class="menu-child" href="pg-venda.html">Venda</a><span class="line2"></span>
+        <a class="menu-child" href="pg-hist-vendas.html">Histórico de Vendas</a>
     </div>
 
-    <div>
+    <div class="corpo-informacoes">
         <!-- ADICIONAR INFORMAÇOES SOBRE SUA LOJINHA -->
-        <p>Aqui você encontra diversos <em> <strong>produtos geek</strong></em>, sempre atualizados e claro, <em>cheios de estilo</em>!</p>
+        <p>Aqui você encontra diversos <em> <strong id="geek">produtos geek</strong></em>, sempre atualizados e claro, <em><strong>cheios de estilo</strong></em>!</p>
     </div>
 
-    <div>
+    <footer>
         <p>Siga-nos nas redes sociais!</p>
 
         <div>
-            <img src="https://image.flaticon.com/icons/png/512/25/25305.png"/>
-            <img src="https://image.flaticon.com/icons/png/512/25/25425.png"/>
-            <img src="https://image.flaticon.com/icons/png/512/8/8800.png"/>
+            <img class="redes-sociais" src="https://image.flaticon.com/icons/png/512/25/25305.png"/>
+            <img class="redes-sociais" src="https://image.flaticon.com/icons/png/512/25/25425.png"/>
+            <img class="redes-sociais" src="https://image.flaticon.com/icons/png/512/8/8800.png"/>
         </div>
-    </div>
+    </footer>
 </body>
 </html>
