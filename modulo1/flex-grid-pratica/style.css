@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-rows: 60px 1fr 60px;
+    background-color: whitesmoke;
+}
+
+a:link {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ----------- header ---------- */
+
+.header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background-color: teal;
+    color: #D6E4E5;
+    font-family: 'Barlow', sans-serif;
+}
+
+.logo {
+    margin: 0 20px;
+}
+
+.container-input-e-icone-busca {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-grow: 1;
+}
+
+.input-busca {
+    width: 50%;
+    max-width: 500px;
+    margin-left: 10%;
+    height: 35px;
+    font-size: 14pt;
+}
+
+.icone-busca {
+    margin: 0 10px;
+}
+
+.login-area {
+    color: rgb(153, 34, 34);
+    margin-right: 20px;
+}
+
+/* ----------- main ---------- */
+
+.main {
+    grid-row: 2;
+    max-height: 90%;
+    width: 80%;
+    justify-self: center;
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 10px;
+}
+
+.video-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 2px 6px darkgrey;
+    border-radius: 4px;
+}
+
+.video-poster {
+    max-width: 240px;
+}
+
+.video-title {
+    margin: 3% 1%;
+    font-size: 16pt;
+    font-weight: 200;
+}
+
+.container-play-video {
+    grid-row: 2;
+    height: 90%;
+    width: 80%;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-play-title {
+    margin: 3%;
+    font-size: 20pt;
+    font-weight: 500;
+    justify-self: center;
+}
+
+.video-play {
+    max-height: 400px;
+    max-width: 800px;
+}
+
+.video-play-description {
+    margin: 3%;
+    font-size: 14pt;
+    font-weight: 200;
+    text-align: center;
+}
+
+/* ----------- footer ---------- */
+
+.footer {
+    grid-row: 3;
+    display: flex;
+    background-color: slategray;
+    color: whitesmoke;
+    font-size: 12pt;
+    font-weight: 200;
+    place-items: center;
+    justify-content: center;
+}
