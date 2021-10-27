@@ -1,0 +1,73 @@
+body {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-rows: 100px repeat(3, 1fr);
+}
+
+div {
+    border: 1px solid black;
+}
+
+.brazel {
+    grid-row: 2;
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: repeat(auto-fill, calc(100vw / 3));
+    grid-gap: 15px;
+}
+
+.brazel div {
+    height: 100px;
+}
+
+.black {
+    grid-row: 3;
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: repeat(auto-fill, calc(100vw / 2));
+    grid-gap: 15px;
+}
+
+.black div {
+    height: 200px;
+}
+
+.white {
+    grid-row: 4;
+    display: grid;
+    justify-content: space-around;
+    grid-template-columns: repeat(auto-fill, calc(100vw / 3));
+    grid-gap: 15px;
+}
+
+.white div {
+    height: 100px;
+}
+
+#first-block {
+    background-color: red;
+    height: 100px;
+}
+
+.blue-block {
+    background-color: blue;
+}
+
+.yellow-block {
+    background-color: yellow;
+}
+
+.green-block {
+    background-color: green;
+}
+
+.black-block {
+    background-color: black;
+    color: white;
+}
+
+.white-block {
+    background-color: white;
+}
