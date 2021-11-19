@@ -1,8 +1,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import { PLDetailContainer, PLDetailHeaderContainer, TrackContainer, ContainerPlayPause, PLDetailAddContainer } from '../styles'
-import play from '../img/play.png'
-import pause from '../img/pause.png'
+import { PLDetailContainer, PLDetailHeaderContainer, TrackContainer, PLDetailAddContainer, ContainerHeader, ContainerLogo, ContainerMenu } from '../styles'
+import logo_claro from '../img/musica_clara.png'
 
 export default class PLDetails extends Component {
 
@@ -69,18 +68,23 @@ export default class PLDetails extends Component {
     render() {
 
         const playlistTracks = this.state.playlistTracks.map(track => {
+            let src = track.url + '?utm_source=generator'
             return <TrackContainer>
-                <h3>{track.name}</h3>
-                <p>{track.artist}</p>
-                <ContainerPlayPause>
-                    <img src={play} alt={'play'} />
-                    <img src={pause} alt={'pause'} />
-                </ContainerPlayPause>
+                    <iframe src={src} width="300" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
             </TrackContainer>
         })
 
         return (
             <PLDetailContainer>
+                <ContainerHeader>
+                        <ContainerLogo onClick={this.props.goToPLlist}>
+                            <img src={logo_claro} alt={'logo'} />
+                            <h1>Labefy</h1>
+                        </ContainerLogo>
+                        <ContainerMenu>
+                            <div onClick={() => this.props.goToPLlist()}>Suas Playlists</div>
+                        </ContainerMenu>
+                    </ContainerHeader>
                 <PLDetailHeaderContainer>
                     Suas músicas em <h2>{this.props.name}</h2>
                 </PLDetailHeaderContainer>

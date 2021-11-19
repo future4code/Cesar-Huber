@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { MainDiv, ContainerHeader, ContainerLogo, ContainerMenu, ContainerMain } from './styles'
-import logo_claro from './img/musica_clara.png'
 import axios from 'axios'
 import CreatePL from './components/CreatePL'
 import PLList from './components/PLList'
@@ -77,9 +76,15 @@ export default class App extends Component {
         return <CreatePL
           qtdPlaylists={this.state.qtdPlaylists}
           createNewPlaylist={this.createNewPlaylist}
+          goToCreatePL={this.goToCreatePL}
+          goToPLlist={this.goToPLlist}
         />
       case 'PLlist':
-        return <PLList />
+        return <PLList 
+          goToCreatePL={this.goToCreatePL}
+          goToPLlist={this.goToPLlist}
+          getQtyAllPlaylists={this.getQtyAllPlaylists}
+        />
       default:
         return <div>Erro! Página não encontrada :(</div>
     }
@@ -90,7 +95,7 @@ export default class App extends Component {
     return (
       <MainDiv>
         <GlobalStyle />
-        <ContainerHeader>
+        {/* <ContainerHeader>
           <ContainerLogo onClick={this.goToCreatePL}>
             <img src={logo_claro} alt={'logo'} />
             <h2>Labefy</h2>
@@ -99,7 +104,7 @@ export default class App extends Component {
             <div onClick={this.goToCreatePL}>Criar Playlist</div>
             <div onClick={this.goToPLlist}>Suas Playlists</div>
           </ContainerMenu>
-        </ContainerHeader>
+        </ContainerHeader> */}
         <ContainerMain>
           {this.choosePage()}
         </ContainerMain>

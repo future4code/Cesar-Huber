@@ -1,5 +1,6 @@
 import React from 'react'
-import { ContainerCreatePL } from '../styles'
+import { ContainerCreatePL, ContainerHeader, ContainerLogo, ContainerMenu } from '../styles'
+import logo_claro from '../img/musica_clara.png'
 
 export default class CreatePL extends React.Component {
 
@@ -9,11 +10,21 @@ export default class CreatePL extends React.Component {
 
     handleNewPlaylistNameChange = (e) => {
         this.setState({ newPlaylistName: e.target.value })
-      }
+    }
 
     render() {
         return (
             <ContainerCreatePL>
+                <ContainerHeader>
+                    <ContainerLogo onClick={this.props.goToCreatePL}>
+                        <img src={logo_claro} alt={'logo'} />
+                        <h1>Labefy</h1>
+                    </ContainerLogo>
+                    <ContainerMenu>
+                        <div onClick={this.props.goToCreatePL}>Criar Playlist</div>
+                        <div onClick={this.props.goToPLlist}>Suas Playlists</div>
+                    </ContainerMenu>
+                </ContainerHeader>
                 {this.props.qtdPlaylists > 0 ?
                     <h3>Você tem {this.props.qtdPlaylists} playlist(s) criada(s)</h3>
                     :

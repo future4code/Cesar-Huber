@@ -1,13 +1,14 @@
 import axios from 'axios'
 import React, { Component } from 'react'
-import { ContainerPLList, EachPlaylist } from '../styles'
+import { ContainerPLList, EachPlaylist, ContainerHeader, ContainerLogo, ContainerMenu } from '../styles'
+import logo_claro from '../img/musica_clara.png'
 import PLDetails from './PLDetails'
 
 export default class PLList extends Component {
 
     state = {
         playlists: [],
-        page: 'PLList',
+        page: 'PLlist',
         playlistDetailId: '',
         playlistDetailName: ''
     }
@@ -39,6 +40,7 @@ export default class PLList extends Component {
         }).then((res) => {
             alert('Playlist excluída com sucesso')
             this.getAllPlaylists()
+            this.props.getQtyAllPlaylists()
         }).catch((err) => {
             alert(err.response.data.message)
         })
@@ -57,22 +59,35 @@ export default class PLList extends Component {
     })
 
     goToPLDetails = (id, name) => {
-        this.setState({ page: 'PLDetails' })
-        this.setState({ playlistDetailId: id })
-        this.setState({ playlistDetailName: name})
+        this.setState({ page: 'PLDetails', playlistDetailId: id, playlistDetailName: name })
     }
+
+    goToPLlist = () => {
+        console.log("cliquei botão suas playlists:", this.state.page)
+        this.setState({ page: 'PLlist' })
+      }
 
     choosePage = () => {
         switch (this.state.page) {
-            case 'PLList':
+            case 'PLlist':
                 return <ContainerPLList>
+                    <ContainerHeader>
+                        <ContainerLogo onClick={this.props.goToCreatePL}>
+                            <img src={logo_claro} alt={'logo'} />
+                            <h1>Labefy</h1>
+                        </ContainerLogo>
+                        <ContainerMenu>
+                            <div onClick={this.props.goToCreatePL}>Criar Playlist</div>
+                            <div onClick={this.goToPLlist}>Suas Playlists</div>
+                        </ContainerMenu>
+                    </ContainerHeader>
                     {this.playlistsList()}
                 </ContainerPLList>
             case 'PLDetails':
-                return <PLDetails 
+                return <PLDetails
                     id={this.state.playlistDetailId}
                     name={this.state.playlistDetailName}
-                    goToPLList={this.goToPLList}
+                    goToPLlist={this.goToPLlist}
                 />
             default:
                 return <div>Erro! Página não encontrada :(</div>
@@ -81,6 +96,7 @@ export default class PLList extends Component {
 
     render() {
         console.log(this.state.playlists)
+        console.log(this.state.page)
         return (
             this.choosePage()
         )

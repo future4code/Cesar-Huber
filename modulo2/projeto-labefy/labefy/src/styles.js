@@ -30,8 +30,10 @@ export const ContainerHeader = styled.div`
         width: 40px;
         height: 40px;
     }
-    h2{
+    h1{
         font-size: 30px;
+        font-family: 'Barlow', sans-serif;
+        font-weight: 500;
     }
 `
 
@@ -157,43 +159,8 @@ export const PLDetailContainer = styled.div`
 
 export const TrackContainer = styled.div`
     margin: 5px;
-    display: grid;
-    grid-template-rows: 24px 22px;
-    grid-template-columns: 150px 150px;
-    align-items: center;
-    background-color: #dbdfac;
     box-shadow: 3px 3px 3px grey;
-    h3{
-        padding: 0 3px;
-        grid-row: 1;
-        grid-column: 1/-1;
-        font-size: 18px;
-        font-family: 'Barlow', sans-serif;
-        font-weight: 400;
-        color: #037171;
-    }
-    p{
-        padding: 0 3px;
-        grid-row: 2;
-        grid-column: 2;
-        font-size: 15px;
-        font-family: 'Barlow', sans-serif;
-        font-weight: 200;
-        color: #db162f;
-    }
-`
-
-export const ContainerPlayPause = styled.div`
-    display: flex;
-    align-items: center;
-    grid-row: 2;
-    grid-column: 1;
-    img{
-        cursor: pointer;
-        width: 18px;
-        height: 18px;
-        margin: 0 10px;
-    }
+    height: 80px;
 `
 
 export const PLDetailHeaderContainer = styled.div`
@@ -217,6 +184,7 @@ export const PLDetailAddContainer = styled.div`
         padding-left: 3px;
     }
     button{
+        cursor: pointer;
         grid-column: 2;
         grid-row: 1/-1;
         border: none;
