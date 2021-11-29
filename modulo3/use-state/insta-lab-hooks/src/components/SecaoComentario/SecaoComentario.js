@@ -14,10 +14,10 @@ const InputComment = styled.input `
 
 const SecaoComentario = (props) => {
 
-	let [inputValue, setInputValue] = useState("")
+	const [inputValue, setInputValue] = useState("")
 
 	const onChangeComentario = (event) => {
-		setInputValue(inputValue = event.target.value)
+		setInputValue(event.target.value)
 	}
 
 	return (
