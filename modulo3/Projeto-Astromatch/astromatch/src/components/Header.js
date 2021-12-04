@@ -9,6 +9,7 @@ import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 
 const HeaderContainer = styled('div')({
+    width: '345px',
     height: '50px',
     backgroundColor: '#F3CECE',
     display: 'flex',
@@ -53,6 +54,16 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
+const ClearStyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+        right: 12,
+        top: 28,
+        border: 'none',
+        padding: '0 2px',
+        fontSize: '10px'
+    },
+}));
+
 export default function Header(props) {
 
     useEffect(() => {
@@ -68,7 +79,9 @@ export default function Header(props) {
             </TitleContainer>
             <IconsContainer>
                 <IconButton onClick={() => { props.clearMatches() }}>
-                    <AutorenewIcon sx={{ color: '#353535' }} />
+                    <ClearStyledBadge badgeContent={'Limpar'}>
+                        <AutorenewIcon sx={{ color: '#353535' }} />
+                    </ClearStyledBadge>
                 </IconButton>
                 <IconButton onClick={() => { props.goToAllMatches() }}>
                     <StyledBadge badgeContent={props.matchesList.length} color="primary">
