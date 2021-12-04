@@ -49,7 +49,7 @@ export default function MainContainer() {
         setMatchesList(res.data.matches)
       })
       .catch((err) => {
-        alert(err.data.response)
+        alert(err.response.data)
       })
   }
 
@@ -60,7 +60,7 @@ export default function MainContainer() {
       alert('Seus matches foram limpos com sucesso')
     })
     .catch((err) => {
-      alert(err.data.response)
+      alert(err.response.data)
     })
   }
 
@@ -85,6 +85,7 @@ export default function MainContainer() {
             matchesList={matchesList}
             getMatches={getMatches}
             clearMatches={clearMatches}
+            currentPage={currentPage}
           />
           {showPage()}
 

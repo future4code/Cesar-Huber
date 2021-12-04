@@ -64,6 +64,8 @@ const ClearStyledBadge = styled(Badge)(({ theme }) => ({
     },
 }));
 
+
+
 export default function Header(props) {
 
     useEffect(() => {
@@ -78,18 +80,29 @@ export default function Header(props) {
                 <h1>AstroMatch</h1>
             </TitleContainer>
             <IconsContainer>
-                <IconButton onClick={() => { props.clearMatches() }}>
+                <IconButton onClick={() => { props.clearMatches() }} >
                     <ClearStyledBadge badgeContent={'Limpar'}>
                         <AutorenewIcon sx={{ color: '#353535' }} />
                     </ClearStyledBadge>
                 </IconButton>
                 <IconButton onClick={() => { props.goToAllMatches() }}>
                     <StyledBadge badgeContent={props.matchesList.length} color="primary">
-                        <ContactsIcon sx={{ color: '#353535' }} />
+                        {
+                            props.currentPage === 'Matches' ?
+                                <ContactsIcon sx={{ color: '#77B154' }} />
+                                :
+                                <ContactsIcon sx={{ color: '#353535' }} />
+                        }
                     </StyledBadge>
                 </IconButton>
                 <IconButton onClick={() => { props.goToHome() }}>
-                    <ContactPageIcon sx={{ color: '#353535' }} />
+                    {
+                        props.currentPage === 'Home' ?
+                            <ContactPageIcon sx={{ color: '#77B154' }} />
+                            :
+                            <ContactPageIcon sx={{ color: '#353535' }} />
+                    }
+                    
                 </IconButton>
             </IconsContainer>
         </HeaderContainer>

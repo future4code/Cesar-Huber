@@ -7,7 +7,7 @@ import YesButton from './YesButton';
 import NoButton from './NoButton';
 import styled from 'styled-components'
 import { BASE_URL, aluno } from '../urls/urls'
-
+import HourglassTopTwoToneIcon from '@mui/icons-material/HourglassTopTwoTone';
 
 const ButtonsContainer = styled.div`
     width: 100%;
@@ -24,12 +24,6 @@ const ProfilePictureContainer = styled.div`
     max-width: 345px;
     display: flex;
     align-items: center;
-    /* background-image: url({profile.photo});
-	background-position: center;
-    background-repeat: no-repeat;
-    background-size: 150%;
-	backdrop-filter: blur(8px);
-    z-index: -1; */
 `
 
 const BackgroundBlur = styled.img`
@@ -59,28 +53,33 @@ const BioContainer = styled.div`
     text-align: center;
 `
 
+const LoadingContainer = styled.div`
+    height: 600px;
+    width: 345px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
+
 export default function Profile(props) {
     const [profile, setProfile] = useState({})
-    // const [showProfile, setShowProfile] = useState(false)
+    const [showProfile, setShowProfile] = useState(false)
 
     const updateProfile = () => {
         axios.get(`${BASE_URL}${aluno}/person`)
             .then((res) => {
                 setProfile(res.data.profile)
-                // setShowProfile(true)
+                setShowProfile(true)
             })
             .catch((err) => {
-                console.log(err.data.response)
+                alert(err.response.data)
             })
     }
 
     useEffect(() => {
         updateProfile()
     }, [])
-
-    // useEffect(() => {
-    //     toRender()
-    // }, [showProfile])
 
     const choosePerson = () => {
         const url = `${BASE_URL}${aluno}/choose-person`
@@ -94,69 +93,46 @@ export default function Profile(props) {
                 props.getMatches()
             })
             .catch((err) => {
-                console.log(err.data.response)
+                alert(err.response.data)
             })
     }
 
-    // const toRender = () => {
-    //     showProfile ?
-    //         <div>
-    //             <Card sx={{ maxWidth: 345 }}>
-    //                 <CardHeader
-    //                     title={profile.name}
-    //                     subheader={profile.age + ' anos'}
-    //                 />
-    //                 <ProfilePictureContainer>
-    //                     <img src={profile.photo} alt={profile.name} />
-    //                 </ProfilePictureContainer>
-    //                 <BioContainer>
-    //                     <Typography variant="body2" color="text.secondary" bgcolor='#D2D7DF'>
-    //                         {profile.bio}
-    //                     </Typography>
-    //                 </BioContainer>
-
-    //             </Card>
-    //             <ButtonsContainer>
-    //                 <YesButton
-    //                     choosePerson={choosePerson}
-    //                 />
-    //                 <NoButton
-    //                     updateProfile={updateProfile}
-    //                 />
-    //             </ButtonsContainer>
-    //         </div>
-    //         :
-    //         <div>
-    //             {'Carregando...'}
-    //         </div>
-    // }
+    const renderShowProfile = 
+        showProfile ?
+            <Card sx={{ height: 600, width: 345 }}>
+                    <CardHeader
+                        title={profile.name}
+                        subheader={profile.age + ' anos'}
+                        sx={{ height: '80px' }}
+                    />
+                    <ProfilePictureContainer>
+                        <BackgroundBlur src={profile.photo} />
+                        <ProfilePicture src={profile.photo} alt={profile.name} />
+                    </ProfilePictureContainer>
+                    <BioContainer>
+                        <Typography variant="body2" color="text.secondary" sx={{ width: '345px', display: 'flex', alignItems: 'center', padding: '0 10px' }}>
+                            {profile.bio}
+                        </Typography>
+                    </BioContainer>
+                    <ButtonsContainer>
+                    <YesButton
+                        choosePerson={choosePerson}
+                    />
+                    <NoButton
+                        updateProfile={updateProfile}
+                    />
+                </ButtonsContainer>
+            </Card>
+        :
+            <LoadingContainer>
+                <HourglassTopTwoToneIcon fontSize='large' />
+                Carregando...
+            </LoadingContainer>
+    
 
     return (
         <div>
-            <Card sx={{ height: 600, maxWidth: 345 }}>
-                <CardHeader
-                    title={profile.name}
-                    subheader={profile.age + ' anos'}
-                    sx={{ height: '80px' }}
-                />
-                <ProfilePictureContainer>
-                    <BackgroundBlur src={profile.photo} />
-                    <ProfilePicture src={profile.photo} alt={profile.name} />
-                </ProfilePictureContainer>
-                <BioContainer>
-                    <Typography variant="body2" color="text.secondary" sx={{ width: '345px', display: 'flex', alignItems: 'center', padding: '0 10px' }}>
-                        {profile.bio}
-                    </Typography>
-                </BioContainer>
-                <ButtonsContainer>
-                <YesButton
-                    choosePerson={choosePerson}
-                />
-                <NoButton
-                    updateProfile={updateProfile}
-                />
-            </ButtonsContainer>
-            </Card>
+            {renderShowProfile}
         </div>
     );
 }

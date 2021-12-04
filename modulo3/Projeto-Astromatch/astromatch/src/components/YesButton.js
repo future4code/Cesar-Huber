@@ -12,7 +12,7 @@ const StyledButton = styled.button`
     margin: 0;
     box-shadow: 1px 1px 5px #353535;
     :hover{
-        background-color: #77B154;
+        background-color: #11C811;
     }
 `
 
