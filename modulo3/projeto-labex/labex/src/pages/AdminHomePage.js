@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 const MainContainer = styled.div`
     display: flex;
@@ -28,25 +29,42 @@ const TripCardContainer = styled.div`
 `
 
 export default function AdminHomePage(props) {
-    return (
+    
+    const history = useHistory()
+    
+    const goBack = () => {
+        history.goBack()
+    }
+
+    const goToCreateTrip = () => {
+        history.push('/createtrip')
+    }
+
+    const goToTripDetail = (id) => {
+        history.push(`/tripdetail/${id}`) 
+        // CHECK: usar com o useParam depois na página do tripdetail para pegar a informação do id
+    }
+
+    return ( 
         <MainContainer>
             Aqui é a home do Admin
             <ButtonsContainer>
-                <button onClick={() => {props.goToHome()}}>Voltar</button>
-                <button onClick={() => {props.goToCreateTrip()}}>Criar Viagem</button>
+                <button onClick={goBack}>Voltar</button>
+                <button onClick={goToCreateTrip}>Criar Viagem</button>
                 <button>Logout</button>
             </ButtonsContainer>
-            <TripCardContainer>
+            <TripCardContainer onClick={() => {goToTripDetail('id_viagem_1')}}>
                 {'Viagem 1'}
-                <button>x</button>
+                <button onClick={() => {console.log('viagem deletada')}}>x</button> 
+                {/* CHECK: clicar no botão de deletar está ativando junto o onclick da div. Ajustar isso. */}
             </TripCardContainer>
-            <TripCardContainer>
+            <TripCardContainer onClick={() => {goToTripDetail('id_viagem_2')}}>
                 {'Viagem 2'}
-                <button>x</button>
+                <button onClick={() => {console.log('viagem deletada')}}>x</button>
             </TripCardContainer>
-            <TripCardContainer>
+            <TripCardContainer onClick={() => {goToTripDetail('id_viagem_3')}}>
                 {'Viagem 3'}
-                <button>x</button>
+                <button onClick={() => {console.log('viagem deletada')}}>x</button>
             </TripCardContainer>
         </MainContainer>
     )

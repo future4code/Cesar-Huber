@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {useHistory} from 'react-router-dom'
 
 const MainContainer = styled.div`
     display: flex;
@@ -9,6 +10,13 @@ const MainContainer = styled.div`
 `
 
 export default function ApplicationFormPage(props) {
+
+    const history = useHistory()
+
+    const goBack = () => {
+        history.goBack()
+    }
+
     return (
         <MainContainer>
             Aqui é o form para aplicar à viagem
@@ -21,7 +29,8 @@ export default function ApplicationFormPage(props) {
             </select>
             <input placeholder={'Nome'} />
             demais inputs...
-            <button onClick={() => {props.goToListTrips()}}>voltar</button>
+            <button onClick={goBack}>voltar</button>
+            <button onClick={() => console.log('form aplicado')}>aplicar</button>
         </MainContainer>
     )
 }

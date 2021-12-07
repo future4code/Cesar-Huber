@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useHistory } from 'react-router-dom'
 
 const MainContainer = styled.div`
     display: flex;
@@ -17,13 +18,20 @@ const MainContainer = styled.div`
 `
 
 export default function CreateTripPage(props) {
+
+    const history = useHistory()
+
+    const goBack = () => {
+        history.goBack()
+    }
+
     return (
         <MainContainer>
             Aqui é a página para criar uma nova Viagem
             <input placeholder={'nome da viagem'} />
             <input placeholder={'descrição da viagem'} />
             <input placeholder={'duração da viagem'} />
-            <button onClick={() => {props.goToAdminHome()}}>Voltar</button>
+            <button onClick={goBack}>Voltar</button>
             <button onClick={() => {console.log('viagem criada - falta API!!!')}}>Criar Viagem</button>
         </MainContainer>
     )
