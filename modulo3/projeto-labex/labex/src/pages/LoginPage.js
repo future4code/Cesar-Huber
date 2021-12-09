@@ -1,15 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
 import {useHistory} from 'react-router-dom'
+import { Login } from '../components/api_connections'
+import { MainContainer } from '../constants/styles'
 
-const MainContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
+export default function LoginPage() {
 
-export default function LoginPage(props) {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     
     const history = useHistory()
 
@@ -17,17 +14,37 @@ export default function LoginPage(props) {
         history.goBack()
     }
 
-    const goToAdmin = () => {
-        history.push('/admin')
+    const handleEmailInput = (e) => {
+        setEmail(e.target.value)
     }
+
+    const handlePasswordInput = (e) => {
+        setPassword(e.target.value)
+    }
+
+    // custom hook useForm?
+    // const clearForm = {
+    //     email: '',
+    //     password: ''
+    // }
 
     return (
         <MainContainer>
-            Aqui é a página de Login
-            <input placeholder={'e-mail'} />
-            <input placeholder={'nome'} />
+            Você precisa estar logado para acessar esta página
+            <input 
+                type={'email'}
+                placeholder={'e-mail'} 
+                value={email}
+                onChange={handleEmailInput}
+            />
+            <input 
+                type={'password'}
+                placeholder={'senha'} 
+                value={password}
+                onChange={handlePasswordInput}
+            />
             <button onClick={goBack}>Voltar</button>
-            <button onClick={goToAdmin}>Login</button>
+            <button onClick={() => {Login(email, password, history)}}>Login</button>
         </MainContainer>
     )
 }

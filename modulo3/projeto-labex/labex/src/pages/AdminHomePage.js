@@ -1,21 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-
-const MainContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
-
-const ButtonsContainer = styled.div`
-    margin: 10px;
-    width: 30%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-`
+import { useProtectedPage } from '../components/hooks/custom_hooks'
+import { MainContainer, ButtonsContainer } from '../constants/styles'
 
 // criar card para cada uma das viagens
 const TripCardContainer = styled.div`
@@ -29,7 +16,9 @@ const TripCardContainer = styled.div`
 `
 
 export default function AdminHomePage(props) {
-    
+
+    useProtectedPage()
+
     const history = useHistory()
     
     const goBack = () => {

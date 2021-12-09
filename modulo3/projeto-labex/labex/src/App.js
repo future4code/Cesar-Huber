@@ -1,5 +1,4 @@
 
-import Header from './components/Header'
 import { createGlobalStyle } from 'styled-components'
 import {Router} from './route/Route'
 
@@ -17,7 +16,6 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
       <Router />
     </>
   );

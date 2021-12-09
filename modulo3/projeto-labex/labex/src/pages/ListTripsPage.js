@@ -1,17 +1,17 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useState, useEffect } from 'react'
 import {useHistory} from 'react-router-dom'
-
-const MainContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`
+import { getTrips } from '../components/api_connections'
+import TripCard from '../components/TripCard'
+import { MainContainer } from '../constants/styles'
 
 export default function ListTripsPage() {
 
     const history = useHistory()
+    const [trips, setTrips] = useState([])
+
+    useEffect(() => {
+        getTrips(setTrips)
+    }, [])
 
     const goBack = () => {
         history.goBack()
@@ -21,15 +21,27 @@ export default function ListTripsPage() {
         history.push(`/application/${id}`)
     }
 
+    const renderTrips = trips.map((trip) => {
+        return (
+            <TripCard 
+                date={trip.date}
+                description={trip.description}
+                duration={trip.durationInDays}
+                name={trip.name}
+                planet={trip.planet}
+                goToApplication={() => {goToApplication(trip.id)}}
+                history={history}
+            />
+        )
+    })
+
     return (
         <MainContainer>
-            Aqui é a Lista de Viagens
+            <h3>Aqui você encontra as viagens disponíveis!</h3>
+            <p>Devido à pandemia, todas as viagens sofreram atraso de 2 anos na data de partida.</p>
+            <p>Clique no card da viagem desejada para se candidatar</p>
             <button onClick={goBack}>Voltar</button>
-            <ul>
-                <li onClick={() => {goToApplication('id_temporário_1')}}>Viagem 1</li>
-                <li onClick={() => {goToApplication('id_temporário_2')}}>Viagem 2</li>
-                <li onClick={() => {goToApplication('id_temporário_3')}}>Viagem 3</li>
-            </ul>
+                {renderTrips}
         </MainContainer>
     )
 }

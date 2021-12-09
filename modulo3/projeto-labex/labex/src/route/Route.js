@@ -6,10 +6,12 @@ import HomePage from '../pages/HomePage'
 import ListTripsPage from '../pages/ListTripsPage'
 import LoginPage from '../pages/LoginPage'
 import TripDetailsPage from '../pages/TripDetailsPage'
+import Header from '../components/Header'
 
 export const Router = () => {
     return (
         <BrowserRouter>
+            <Header />
             <Switch>
                 <Route exact path={'/'}>
                     <HomePage />
