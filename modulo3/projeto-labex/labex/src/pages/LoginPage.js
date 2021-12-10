@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import {useHistory} from 'react-router-dom'
-import { Login } from '../components/api_connections'
+import { Login } from '../components/api_requests'
 import { MainContainer } from '../constants/styles'
+import { useSkipLogin } from '../components/hooks/custom_hooks'
 
 export default function LoginPage() {
+
+    useSkipLogin()
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -12,6 +15,7 @@ export default function LoginPage() {
 
     const goBack = () => {
         history.goBack()
+        console.log('cliquei voltar')
     }
 
     const handleEmailInput = (e) => {
@@ -21,12 +25,6 @@ export default function LoginPage() {
     const handlePasswordInput = (e) => {
         setPassword(e.target.value)
     }
-
-    // custom hook useForm?
-    // const clearForm = {
-    //     email: '',
-    //     password: ''
-    // }
 
     return (
         <MainContainer>

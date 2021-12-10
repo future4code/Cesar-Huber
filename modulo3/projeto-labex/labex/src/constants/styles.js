@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
 export const COLORS = {
-    xtealish:"#3c8f9a",
-    xyellowish:"#f0a202",
-    xgreyish:"#2b2c28",
-    xredish:"#ee6055",
-    xwhiteish:"#f6f7eb"
+    xtealish: "#3c8f9a",
+    xyellowish: "#f0a202",
+    xgreyish: "#2b2c28",
+    xredish: "#ee6055",
+    xwhiteish: "#f6f7eb"
 }
 
 export const MainContainer = styled.div`
@@ -22,7 +22,7 @@ export const MainContainer = styled.div`
         font-weight: 100;
         text-align: center;
     }
-    img{
+    >img{
         margin: 10px;
         height: 30vw;
         border-radius: 800px;
@@ -47,18 +47,57 @@ export const ButtonsContainer = styled.div`
 `
 
 export const StyledButtonTeal = styled.button`
-border: none;
-background-color: ${COLORS.xwhiteish};
-color: ${COLORS.xgreyish};
-margin: 10px;
-padding: 7px 15px;
-border-radius: 5px;
-cursor: pointer;
-font-size: calc(20px + 10 * ((100vw - 345px) / (1200 - 345)));
-font-weight: 100;
-transition: background-color 0.3s, color 0.3s;
-&:hover{
-    background-color: ${COLORS.xtealish};
-    color: ${COLORS.xwhiteish}
-}
+    border: none;
+    background-color: ${COLORS.xwhiteish};
+    color: ${COLORS.xgreyish};
+    margin: 10px;
+    padding: 7px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: calc(20px + 10 * ((100vw - 345px) / (1200 - 345)));
+    font-weight: 100;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover{
+        background-color: ${COLORS.xtealish};
+        color: ${COLORS.xwhiteish}
+    }
+`
+
+export const StyledForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    min-width: 250px;
+    max-width: 350px;
+    select, input{
+        width: 100%;
+        margin: 10px 0;
+        padding: 4px 8px;
+        border: 1px solid black;
+        border-radius: 5px;
+    }
+    button{
+        max-width: 100px;
+    }
+`
+
+export const TripCardContainer = styled.div`
+    margin: 10px;
+    padding: 3px 10px;
+    border: 1px solid black;
+    width: 30%;
+    min-width: 240px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p{
+        flex-grow: 1;
+        cursor: pointer;
+    }
+    img{
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
 `

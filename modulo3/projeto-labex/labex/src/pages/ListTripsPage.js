@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useHistory} from 'react-router-dom'
-import { getTrips } from '../components/api_connections'
+import { getTrips } from '../components/api_requests'
 import TripCard from '../components/TripCard'
 import { MainContainer } from '../constants/styles'
 
@@ -31,6 +31,7 @@ export default function ListTripsPage() {
                 planet={trip.planet}
                 goToApplication={() => {goToApplication(trip.id)}}
                 history={history}
+                key={trip.id}
             />
         )
     })

@@ -30,10 +30,26 @@ export const Login = (email, password, history) => {
         })
 }
 
-export const getTripDetail = (id) => {
+export const getTripDetail = (id, setTripDetails) => {
     const token = localStorage.getItem('token')
 
     axios.get(`${BASE_URL}${ALUNO}/trip/${id}`, {
+        headers: {
+            auth: token
+        }
+    })
+        .then((res) => {
+            setTripDetails(res.data.trip)
+        })
+        .catch((err) => {
+            console.log(err.response.data)
+        })
+}
+
+export const postCreateTrip = (body) => {
+    const token = localStorage.getItem('token')
+
+    axios.post(`${BASE_URL}${ALUNO}/trips`, body, {
         headers: {
             auth: token
         }
@@ -46,18 +62,29 @@ export const getTripDetail = (id) => {
         })
 }
 
-export const postCreateTrip = (body) => {
+export const postApplication = (tripId, body) => {
+
+    axios.post(`${BASE_URL}${ALUNO}/trips/${tripId}/apply`, body)
+    .then((res) => {
+        console.log(res )
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+}
+
+export const deleteTrip = (id) => {
     const token = localStorage.getItem('token')
 
-    axios.get(`${BASE_URL}${ALUNO}/trips`, body, {
+    axios.delete(`${BASE_URL}${ALUNO}/trips/${id}`, {
         headers: {
             auth: token
         }
     })
-        .then((res) => {
-            console.log(res.data)
-        })
-        .catch((err) => {
-            console.log(err.response.data)
-        })
+    .then((res) => {
+        console.log(res.data)
+    })
+    .catch((err) => {
+        console.log(err.response.data)
+    })
 }
