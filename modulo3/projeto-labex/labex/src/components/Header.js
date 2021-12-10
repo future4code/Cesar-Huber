@@ -4,7 +4,7 @@ import logo from '../img/logo.png'
 import {COLORS} from '../constants/styles'
 import { useHistory } from 'react-router-dom'
 
-const MainContainer = styled.div`
+const HeaderContainer = styled.div`
     height: 80px;
     width: 100vw;
     display: flex;
@@ -25,8 +25,8 @@ export default function Header() {
     }
 
     return (
-        <MainContainer onClick={goToHome}>
+        <HeaderContainer onClick={goToHome}>
             <img src={logo} alt='logo' />
-        </MainContainer>
+        </HeaderContainer>
     )
 }

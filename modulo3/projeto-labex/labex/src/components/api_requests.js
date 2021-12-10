@@ -88,3 +88,25 @@ export const deleteTrip = (id) => {
         console.log(err.response.data)
     })
 }
+
+export const decideCandidate = (tripId, candidateId, decision, getTripDetail, setTripDetails) => {
+    const token = localStorage.getItem('token')
+    const body = {
+        approve: decision
+    }
+    console.log('infos recebidas | tripId: ', tripId, ' candidateId: ', candidateId, ' decision: ', decision)
+
+    axios.put(`${BASE_URL}${ALUNO}/trips/${tripId}/candidates/${candidateId}/decide`, body, {
+        headers: {
+            auth: token
+        }
+    })
+    .then((res) => {
+        getTripDetail(tripId, setTripDetails)
+        let msg = decision ? 'aprovado' : 'rejeitado'
+        alert(`Candidato ${msg} com sucesso!`)
+    })
+    .catch((err) => {
+        alert(err.response.data)
+    })
+}

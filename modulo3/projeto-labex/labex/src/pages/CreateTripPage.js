@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { useProtectedPage, useForm } from '../components/hooks/custom_hooks'
-import { MainContainer, StyledForm } from '../constants/styles'
+import { MainContainer, StyledForm, StyledGoBackButton, ApplicationContainer } from '../constants/styles'
 import { postCreateTrip } from '../components/api_requests'
 import { planets } from '../constants/planets_list'
 
@@ -36,7 +36,9 @@ export default function CreateTripPage(props) {
 
     return (
         <MainContainer>
-            Aqui é a página para criar uma nova Viagem
+            <ApplicationContainer>
+                Crie aqui uma nova viagem preenchendo os campos abaixo:
+            </ApplicationContainer>
             <StyledForm onSubmit={create}>
                 <input
                     name={'name'}
@@ -73,7 +75,7 @@ export default function CreateTripPage(props) {
                 />
                 <button>Criar Viagem</button>
             </StyledForm>
-            <button onClick={goBack}>Voltar</button>
+            <StyledGoBackButton onClick={goBack}>Voltar</StyledGoBackButton>
         </MainContainer>
     )
 }

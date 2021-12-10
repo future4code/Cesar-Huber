@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useProtectedPage } from '../components/hooks/custom_hooks'
-import { MainContainer, ButtonsContainer, TripCardContainer } from '../constants/styles'
+import { MainContainer, ButtonsContainer, TripCardContainer, StyledAdminButton, StyledGoBackButton, StyledLogoutButton } from '../constants/styles'
 import { getTrips, deleteTrip } from '../components/api_requests'
-import activeIcon from '../img/trash-bin_red.png'
 import inactiveIcon from '../img/trash-bin_black.png'
 
 // criar card para cada uma das viagens
@@ -16,12 +15,11 @@ export default function AdminHomePage(props) {
     const history = useHistory()
     const token = localStorage.getItem('token')
     const [trips, setTrips] = useState([])
-    const [iconHovered, setIconHovered] = useState(false)
 
     useEffect(() => {
         getTrips(setTrips)
     }, [])
-    
+
     const goBack = () => {
         if (token === null) {
             history.goBack()
@@ -32,7 +30,7 @@ export default function AdminHomePage(props) {
 
     const logout = () => {
         localStorage.clear()
-        history.push('/')
+        history.push('/login')
     }
 
     const goToCreateTrip = () => {
@@ -40,37 +38,30 @@ export default function AdminHomePage(props) {
     }
 
     const goToTripDetail = (id) => {
-        history.push(`/tripdetail/${id}`) 
-        // CHECK: usar com o useParam depois na página do tripdetail para pegar a informação do id
+        history.push(`/tripdetail/${id}`)
     }
 
     const renderTrips = trips.map((trip) => {
         return (
-            <TripCardContainer key={trip.id} onClick={() => {goToTripDetail(trip.id)}}>
-                <p>{trip.name}</p>
-                <div 
-                    onMouseEnter={() => {setIconHovered(true)}} 
-                    onMouseOut={() => {setIconHovered(false)}}
-                    onClick={() => {deleteTrip(trip.id)}}
-                >
-                    {iconHovered ? 
-                    <img src={activeIcon} alt={'Ícone ativo'} /> 
-                    : 
+            <TripCardContainer key={trip.id}>
+                <div onClick={() => { goToTripDetail(trip.id) }}>
+                    {trip.name}
+                </div>
+                <div onClick={() => { deleteTrip(trip.id) }}>
                     <img src={inactiveIcon} alt={'Ícone inativo'} />
-                    }
-                </div> 
+                </div>
             </TripCardContainer>
         )
     })
 
-    return ( 
+    return (
         <MainContainer>
-            Aqui é a home do Admin
             <ButtonsContainer>
-                <button onClick={goBack}>Voltar</button>
-                <button onClick={goToCreateTrip}>Criar Viagem</button>
-                <button onClick={logout}>Logout</button>
+                <StyledGoBackButton onClick={goBack}>Voltar</StyledGoBackButton>
+                <StyledAdminButton onClick={goToCreateTrip}>Criar Viagem</StyledAdminButton>
+                <StyledLogoutButton onClick={logout}>Logout</StyledLogoutButton>
             </ButtonsContainer>
+            <h3>Lista das Viagens</h3>
             {renderTrips}
         </MainContainer>
     )

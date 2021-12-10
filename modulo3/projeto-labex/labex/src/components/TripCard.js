@@ -5,7 +5,7 @@ const TripCardContainer = styled.div`
     cursor: pointer;
     width: 40vw;
     min-width: 272px;
-    margin: 5px;
+    margin: 10px;
     padding: 10px;
     border-radius: 5px;
     background: rgba(246, 247, 235, .6);

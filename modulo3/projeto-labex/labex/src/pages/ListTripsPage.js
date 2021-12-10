@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {useHistory} from 'react-router-dom'
 import { getTrips } from '../components/api_requests'
 import TripCard from '../components/TripCard'
-import { MainContainer } from '../constants/styles'
+import { MainContainer, StyledGoBackButton } from '../constants/styles'
 
 export default function ListTripsPage() {
 
@@ -41,7 +41,7 @@ export default function ListTripsPage() {
             <h3>Aqui você encontra as viagens disponíveis!</h3>
             <p>Devido à pandemia, todas as viagens sofreram atraso de 2 anos na data de partida.</p>
             <p>Clique no card da viagem desejada para se candidatar</p>
-            <button onClick={goBack}>Voltar</button>
+            <StyledGoBackButton onClick={goBack}>Voltar</StyledGoBackButton>
                 {renderTrips}
         </MainContainer>
     )

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { getTrips, postApplication } from '../components/api_requests'
-import {useHistory, useParams} from 'react-router-dom'
-import { MainContainer, StyledForm } from '../constants/styles'
+import { useHistory, useParams } from 'react-router-dom'
+import { MainContainer, StyledForm, ApplicationContainer, StyledGoBackButton } from '../constants/styles'
 import { useForm } from '../components/hooks/custom_hooks'
+import { countries } from '../constants/countries_list'
 
 export default function ApplicationFormPage(props) {
 
@@ -30,13 +31,13 @@ export default function ApplicationFormPage(props) {
         applicationText: '',
         profession: '',
         country: ''
-      });
+    });
 
     const renderTripsNames = trips.map(trip => {
         if (trip.id === pathParams.id) {
-            return <option selected="selected" key={trip.id} value={trip.id} onChange={() => {handleSelectedTrip(trip.id)}}>{trip.name}</option>
+            return <option selected="selected" key={trip.id} value={trip.id} onChange={() => { handleSelectedTrip(trip.id) }}>{trip.name}</option>
         } else {
-            return <option key={trip.id} value={trip.id} onChange={() => {handleSelectedTrip(trip.id)}}>{trip.name}</option>
+            return <option key={trip.id} value={trip.id} onChange={() => { handleSelectedTrip(trip.id) }}>{trip.name}</option>
         }
     })
 
@@ -44,28 +45,28 @@ export default function ApplicationFormPage(props) {
         event.preventDefault();
         postApplication(selectedTripId, form);
         cleanFields();
-      };
+    };
 
     return (
         <MainContainer>
-            Aqui é o form para aplicar à viagem
-            <hr/>
-            Vai ter um form com o nome da viagem pre-selecionado com base no id da viagem {props.applicationId}
-            <select>
-                {renderTripsNames}
-            </select>
+            <ApplicationContainer>
+                Confirme a escolha da viagem:
+                <select>
+                    {renderTripsNames}
+                </select>
+            </ApplicationContainer>
 
             <StyledForm onSubmit={sendForm}>
-                <input 
+                <input
                     name={'name'}
                     value={form.name}
                     onChange={onChange}
-                    placeholder={'Nome'} 
+                    placeholder={'Nome'}
                     required
                     pattern={"^.{3,}"}
                     title={"O nome deve ter no mínimo 3 letras"}
                 />
-                <input 
+                <input
                     name={'age'}
                     value={form.age}
                     onChange={onChange}
@@ -75,7 +76,6 @@ export default function ApplicationFormPage(props) {
                     min={'18'}
                 />
                 <input
-                    style={{height: '150px'}}
                     name={'applicationText'}
                     value={form.applicationText}
                     onChange={onChange}
@@ -84,24 +84,18 @@ export default function ApplicationFormPage(props) {
                     pattern={"^.{30,}"}
                     title={"O texto precisa ter pelo menos 30 caracteres. Tem que convencer a gente que você merece poxa."}
                 />
-                <input 
+                <input
                     name={'profession'}
                     value={form.profession}
                     onChange={onChange}
                     placeholder={'Profissão'}
                     required
                 />
-                <input 
-                    name={'country'}
-                    value={form.country}
-                    onChange={onChange}
-                    placeholder={'Escolha um País'}
-                    required
-                />
+                {countries(onChange)}
                 <button>Candidata eu!</button>
             </StyledForm>
 
-            <button onClick={goBack}>Voltar</button>
+            <StyledGoBackButton onClick={goBack}>Voltar</StyledGoBackButton>
         </MainContainer>
     )
 }

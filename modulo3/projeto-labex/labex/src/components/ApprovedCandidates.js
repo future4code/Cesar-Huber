@@ -1,15 +1,15 @@
 import styled from 'styled-components'
-import { ButtonsContainer, StyledApproveButton, StyledRejectButton } from '../constants/styles'
-import { getTripDetail } from './api_requests'
+import { COLORS } from '../constants/styles'
 
 const CandidatesContainer = styled.div`
     width: 40vw;
     min-width: 272px;
-    margin: 5px;
+    margin: 15px;
     padding: 10px;
     border-radius: 5px;
     background: rgba(246, 247, 235, .6);
-    border: 2px solid rgba(240, 162, 2, .6); // rgb de xyellowish
+    border: 2px solid rgba(60, 143, 154, .8); // rgb de xtealish
+    box-shadow: 2px 2px 7px ${COLORS.xtealishlight};
 `
 
 const SecondaryContainer = styled.div`
@@ -18,7 +18,7 @@ const SecondaryContainer = styled.div`
     padding-right: 20px;
 `
 
-export default function Candidates(props) {
+export default function ApprovedCandidates(props) {
     return (
         <CandidatesContainer>
             <p><b>Nome: </b>{props.name}</p>
@@ -28,10 +28,6 @@ export default function Candidates(props) {
                 <p><b>País: </b>{props.country}</p>
             </SecondaryContainer>
             <p><b>Texto de Candidatura: </b>{props.applicationText}</p>
-            <ButtonsContainer>
-                <StyledApproveButton onClick={() => {props.decideCandidate(props.tripId, props.candidateId, true, props.getTripDetail, props.setTripDetails)}}>Aprovar</StyledApproveButton>
-                <StyledRejectButton onClick={() => {props.decideCandidate(props.tripId, props.candidateId, false)}}>Rejeitar</StyledRejectButton>
-            </ButtonsContainer>
         </CandidatesContainer>
     )
 }
