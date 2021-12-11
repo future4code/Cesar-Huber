@@ -8,8 +8,6 @@ import Candidates from '../components/Candidates'
 import ApprovedCandidates from '../components/ApprovedCandidates'
 import { decideCandidate } from '../components/api_requests'
 
-// fazer o card para cada candidato, com um resumo do form preenchido
-
 export default function TripDetailsPage() {
 
     useProtectedPage()

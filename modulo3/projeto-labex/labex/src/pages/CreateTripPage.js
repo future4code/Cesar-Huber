@@ -32,8 +32,6 @@ export default function CreateTripPage(props) {
         return <option key={index} value={planet}>{planet}</option>
     })
 
-    console.log(renderedPlanets)
-
     return (
         <MainContainer>
             <ApplicationContainer>

@@ -7,7 +7,7 @@ export const getTrips = (setTrips) => {
             setTrips(res.data.trips)
         })
         .catch((err) => {
-            alert(err.response.data) 
+            alert(err.response.data.message) 
         })
 }
 
@@ -26,7 +26,7 @@ export const Login = (email, password, history) => {
             history.push('/admin')
         })
         .catch((err) => {
-            alert(err.response.data)
+            alert(err.response.data.message)
         })
 }
 
@@ -42,7 +42,7 @@ export const getTripDetail = (id, setTripDetails) => {
             setTripDetails(res.data.trip)
         })
         .catch((err) => {
-            console.log(err.response.data)
+            alert(err.response.data.message)
         })
 }
 
@@ -55,21 +55,20 @@ export const postCreateTrip = (body) => {
         }
     })
         .then((res) => {
-            console.log(res.data)
+            alert('Viagem criada com sucesso!')
         })
         .catch((err) => {
-            console.log(err.response.data)
+            alert(err.response.data.message)
         })
 }
 
 export const postApplication = (tripId, body) => {
-
     axios.post(`${BASE_URL}${ALUNO}/trips/${tripId}/apply`, body)
     .then((res) => {
-        console.log(res )
+        alert('Formulário enviado com sucesso!\nAguarde ser informada sobre nossa decisão.')
     })
     .catch((err) => {
-        console.log(err)
+        alert(err.response.data.message)
     })
 }
 
@@ -82,10 +81,10 @@ export const deleteTrip = (id) => {
         }
     })
     .then((res) => {
-        console.log(res.data)
+        alert('Viagem deletada com sucesso!')
     })
     .catch((err) => {
-        console.log(err.response.data)
+        alert(err.response.data.message)
     })
 }
 
@@ -94,7 +93,6 @@ export const decideCandidate = (tripId, candidateId, decision, getTripDetail, se
     const body = {
         approve: decision
     }
-    console.log('infos recebidas | tripId: ', tripId, ' candidateId: ', candidateId, ' decision: ', decision)
 
     axios.put(`${BASE_URL}${ALUNO}/trips/${tripId}/candidates/${candidateId}/decide`, body, {
         headers: {
@@ -107,6 +105,6 @@ export const decideCandidate = (tripId, candidateId, decision, getTripDetail, se
         alert(`Candidato ${msg} com sucesso!`)
     })
     .catch((err) => {
-        alert(err.response.data)
+        alert(err.response.data.message)
     })
 }

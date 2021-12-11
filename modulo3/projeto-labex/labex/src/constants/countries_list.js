@@ -1,6 +1,6 @@
 export const countries = (onChange) => {
     return (
-    <select name='country' onChange={onChange} required>
+    <select name={'country'} onChange={onChange} required>
         <option selected disabled>Escolha um país...</option>
         <option value="África do Sul">África do Sul</option>
         <option value="Albânia">Albânia</option>

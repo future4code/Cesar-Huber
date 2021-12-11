@@ -14,6 +14,7 @@ export default function ApplicationFormPage(props) {
 
     useEffect(() => {
         getTrips(setTrips)
+        setSelectedTripId(pathParams.id)
     }, [])
 
     const goBack = () => {
@@ -21,7 +22,6 @@ export default function ApplicationFormPage(props) {
     }
 
     const handleSelectedTrip = (id) => {
-        console.log(id)
         setSelectedTripId(id)
     }
 
@@ -92,7 +92,7 @@ export default function ApplicationFormPage(props) {
                     required
                 />
                 {countries(onChange)}
-                <button>Candidata eu!</button>
+                <button onClick={sendForm}>Candidata eu!</button>
             </StyledForm>
 
             <StyledGoBackButton onClick={goBack}>Voltar</StyledGoBackButton>

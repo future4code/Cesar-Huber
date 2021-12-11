@@ -5,9 +5,6 @@ import { MainContainer, ButtonsContainer, TripCardContainer, StyledAdminButton, 
 import { getTrips, deleteTrip } from '../components/api_requests'
 import inactiveIcon from '../img/trash-bin_black.png'
 
-// criar card para cada uma das viagens
-
-
 export default function AdminHomePage(props) {
 
     useProtectedPage()
