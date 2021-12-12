@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useProtectedPage } from '../components/hooks/custom_hooks'
-import { MainContainer, ButtonsContainer, TripCardContainer, StyledAdminButton, StyledGoBackButton, StyledLogoutButton } from '../constants/styles'
+import { MainContainer, ButtonsContainer, TripCardContainer, StyledAdminButton, StyledGoBackButton, StyledLogoutButton, TripCardContainerName } from '../constants/styles'
 import { getTrips, deleteTrip } from '../components/api_requests'
 import inactiveIcon from '../img/trash-bin_black.png'
 
@@ -40,11 +40,11 @@ export default function AdminHomePage(props) {
 
     const renderTrips = trips.map((trip) => {
         return (
-            <TripCardContainer key={trip.id}>
-                <div onClick={() => { goToTripDetail(trip.id) }}>
+            <TripCardContainer key={trip.id}> 
+                <TripCardContainerName onClick={() => { goToTripDetail(trip.id) }}>
                     {trip.name}
-                </div>
-                <div onClick={() => { deleteTrip(trip.id) }}>
+                </TripCardContainerName>
+                <div onClick={() => { deleteTrip(trip.id, getTrips, setTrips) }}>
                     <img src={inactiveIcon} alt={'Ícone inativo'} />
                 </div>
             </TripCardContainer>

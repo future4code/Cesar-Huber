@@ -30,7 +30,7 @@ export default function Candidates(props) {
             <p><b>Texto de Candidatura: </b>{props.applicationText}</p>
             <ButtonsContainer>
                 <StyledApproveButton onClick={() => {props.decideCandidate(props.tripId, props.candidateId, true, props.getTripDetail, props.setTripDetails)}}>Aprovar</StyledApproveButton>
-                <StyledRejectButton onClick={() => {props.decideCandidate(props.tripId, props.candidateId, false)}}>Rejeitar</StyledRejectButton>
+                <StyledRejectButton onClick={() => {props.decideCandidate(props.tripId, props.candidateId, false, props.getTripDetail, props.setTripDetails)}}>Rejeitar</StyledRejectButton>
             </ButtonsContainer>
         </CandidatesContainer>
     )

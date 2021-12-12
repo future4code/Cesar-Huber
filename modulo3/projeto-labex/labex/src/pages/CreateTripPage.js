@@ -44,8 +44,10 @@ export default function CreateTripPage(props) {
                     onChange={onChange}
                     placeholder={'nome da viagem'}
                     required
+                    pattern={"^.{8,}"}
+                    title={'Insira um nome com pelo menos 8 caracteres'}
                 />
-                <select name={'planet'} onChange={onChange}>
+                <select name={'planet'} onChange={onChange} required>
                     <option selected disabled>Escolha um planeta</option>
                     {renderedPlanets}
                 </select>
@@ -56,6 +58,7 @@ export default function CreateTripPage(props) {
                     placeholder={'data'}
                     required
                     type={'date'}
+                    title={'Informe uma data válida'}
                 />
                 <input
                     name={'description'}
@@ -63,6 +66,8 @@ export default function CreateTripPage(props) {
                     onChange={onChange}
                     placeholder={'descrição'}
                     required
+                    pattern={"^.{20,}"}
+                    title={'Informe uma descrição mais detalhada com pelo menos 20 caracteres'}
                 />
                 <input
                     name={'durationInDays'}
@@ -70,6 +75,8 @@ export default function CreateTripPage(props) {
                     onChange={onChange}
                     placeholder={'duração (dias)'}
                     required
+                    type={'number'}
+                    min={5}
                 />
                 <button>Criar Viagem</button>
             </StyledForm>

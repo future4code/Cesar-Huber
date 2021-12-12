@@ -229,3 +229,11 @@ export const TripCardContainer = styled.div`
         }
     }
 `
+
+export const TripCardContainerName = styled.div`
+    flex: 1;
+    min-height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+`

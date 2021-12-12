@@ -47,7 +47,7 @@ export default function TripDetailsPage() {
                 country={candidate.country}
                 applicationText={candidate.applicationText}
                 candidateId={candidate.id}
-                tripId={tripDetails.id}
+                tripId={pathParams.id}
                 decideCandidate={decideCandidate}
                 getTripDetail={getTripDetail}
                 setTripDetails={setTripDetails}

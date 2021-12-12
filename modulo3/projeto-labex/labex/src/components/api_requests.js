@@ -72,20 +72,26 @@ export const postApplication = (tripId, body) => {
     })
 }
 
-export const deleteTrip = (id) => {
+export const deleteTrip = (id, getTrips, setTrips) => {
     const token = localStorage.getItem('token')
 
-    axios.delete(`${BASE_URL}${ALUNO}/trips/${id}`, {
-        headers: {
-            auth: token
-        }
-    })
-    .then((res) => {
-        alert('Viagem deletada com sucesso!')
-    })
-    .catch((err) => {
-        alert(err.response.data.message)
-    })
+    const confirmation = window.confirm('Deseja realmente excluir esta viagem?')
+
+    confirmation &&
+    (
+        axios.delete(`${BASE_URL}${ALUNO}/trips/${id}`, {
+            headers: {
+                auth: token
+            }
+        })
+        .then((res) => {
+            getTrips(setTrips)
+            alert('Viagem deletada com sucesso!')
+        })
+        .catch((err) => {
+            alert(err.response.data.message)
+        })
+    )
 }
 
 export const decideCandidate = (tripId, candidateId, decision, getTripDetail, setTripDetails) => {

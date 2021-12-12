@@ -90,6 +90,7 @@ export default function ApplicationFormPage(props) {
                     onChange={onChange}
                     placeholder={'Profissão'}
                     required
+                    pattern={"^.{3,}"}
                 />
                 {countries(onChange)}
                 <button onClick={sendForm}>Candidata eu!</button>
