@@ -11,6 +11,7 @@ export const HeaderMainContainer = styled.div`
     align-items: center;
     background-color: ${COLORS.eWhiteish};
     color: ${COLORS.ePrimary};
+    z-index: 1;
     h2{
         margin: 10px;
     }
@@ -61,4 +62,30 @@ export const RegisterButton = styled.button`
         color: ${COLORS.eWhiteish};
         font-weight: 400;
     }
+`
+
+export const LogoutButton = styled.button`
+    cursor: pointer;
+    margin: 1px 10px;
+    padding: 4px 10px;
+    border: 1px solid ${COLORS.eDarkish};
+    background-color: ${COLORS.eWhite};
+    color: ${COLORS.eDarkish};
+    border-radius: 25px;
+    font-size: 16px;
+    &:hover{
+        background-color: ${COLORS.eDarkish};
+        color: ${COLORS.eWhiteish};
+        font-weight: 400;
+    }
+`
+
+export const PostMainContainer = styled.div`
+    margin: 10px;
+    width: 400px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `

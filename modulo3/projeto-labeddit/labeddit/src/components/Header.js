@@ -1,11 +1,14 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-import { HeaderMainContainer, HeaderLogoContainer, HeaderUserContainer, LoginButton, RegisterButton } from './styles';
+import { HeaderMainContainer, HeaderLogoContainer, HeaderUserContainer, LoginButton, RegisterButton, LogoutButton } from './styles';
 
 export default function Header() {
 
     const navigate = useNavigate()
+
+    const pathname = window.location.pathname
+    const token = localStorage.getItem('token')
 
     const goToLogin = () => {
         navigate('/login')
@@ -15,8 +18,13 @@ export default function Header() {
         navigate('/signup')
     }
 
-    const goToHome =() => {
+    const goToHome = () => {
         navigate('/')
+    }
+
+    const logout = () => {
+        localStorage.clear()
+        goToLogin()
     }
 
     return (
@@ -26,8 +34,9 @@ export default function Header() {
                 <h2>Labeddit</h2>
             </HeaderLogoContainer>
             <HeaderUserContainer>
-                <LoginButton onClick={goToLogin}>Login</LoginButton>
-                <RegisterButton onClick={goToSignup}>Cadastre-se</RegisterButton>
+                { token === null && pathname !== '/login' ? <LoginButton onClick={goToLogin}>Login</LoginButton> : ''}
+                { token === null && pathname !== '/signup' ? <RegisterButton onClick={goToSignup}>Cadastre-se</RegisterButton> : ''}
+                {token !== null ? <LogoutButton onClick={logout}>Logout</LogoutButton> : '' }
             </HeaderUserContainer>
         </HeaderMainContainer>
     )
