@@ -19,8 +19,8 @@ export default function Login() {
     }
 
     const { form, onChange, cleanFields } = useForm({
-        email: "",
-        password: ""
+        email: '',
+        password: ''
     });
 
     const submitLogin = (e) => {

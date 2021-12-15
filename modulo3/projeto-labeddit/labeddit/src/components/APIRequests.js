@@ -41,7 +41,7 @@ export const getPosts = (setPosts, page, postsPerPage) => {
     })
 }
 
-export const postPost = (body) => {
+export const createPost = (body, updateRender) => {
     
     const token = localStorage.getItem('token')
 
@@ -52,6 +52,92 @@ export const postPost = (body) => {
     })
     .then((res) => {
         alert('Postado com sucesso no feed')
+        updateRender()
+    })
+    .catch((err) => {
+        alert(err.response.data)
+    })
+}
+
+export const getPostComments = (setPostComments, id) => {
+
+    const token = localStorage.getItem('token')
+
+    axios.get(`${BASE_URL}/posts/${id}/comments`, {
+        headers: {
+            Authorization: token
+        }
+    })
+    .then((res) => {
+        setPostComments(res.data)
+    })
+    .catch((err) => {
+        alert(err.response)
+    })
+}
+
+export const createComment = (id, body, updateRender) => {
+
+    const token = localStorage.getItem('token')
+
+    axios.post(`${BASE_URL}/posts/${id}/comments`, body, {
+        headers: {
+            Authorization: token
+        }
+    })
+    .then((res) => {
+        updateRender()
+    })
+    .catch((err) => {
+        alert(err.response.data)
+    })
+}
+
+export const createPostVote = (id, body, updateRender) => {
+
+    const token = localStorage.getItem('token')
+
+    axios.post(`${BASE_URL}/posts/${id}/votes`, body, {
+        headers: {
+            Authorization: token
+        }
+    })
+    .then((res) => {
+        updateRender()
+    })
+    .catch((err) => {
+        alert(err.response.data)
+    })
+}
+
+export const changePostVote = (id, body, updateRender) => {
+
+    const token = localStorage.getItem('token')
+
+    axios.put(`${BASE_URL}/posts/${id}/votes`, body, {
+        headers: {
+            Authorization: token
+        }
+    })
+    .then((res) => {
+        updateRender()
+    })
+    .catch((err) => {
+        alert(err.response.data)
+    })
+}
+
+export const deletePostVote = (id, updateRender) => {
+
+    const token = localStorage.getItem('token')
+
+    axios.delete(`${BASE_URL}/posts/${id}/votes`, {
+        headers: {
+            Authorization: token
+        }
+    })
+    .then((res) => {
+        updateRender()
     })
     .catch((err) => {
         alert(err.response.data)
