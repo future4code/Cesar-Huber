@@ -9,6 +9,7 @@ import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
 import Comment from '../../components/Comment'
 import { COLORS } from '../../constants/styling'
 import { useForm } from '../../hooks/useForm'
+import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 
 export default function Post() {
 
@@ -24,12 +25,13 @@ export default function Post() {
     const [postComments, setPostComments] = useState([])
     const [upVote, setUpVote] = useState(false)
     const [downVote, setDownVote] = useState(false)
-    const {form, onChange, cleanFields} = useForm({
+    const [loading, setLoading] = useState(false)
+    const { form, onChange, cleanFields } = useForm({
         body: ''
     })
 
     useEffect(() => {
-        getPosts(setPosts, pathParams.page, pathParams.postsPerPage)
+        getPosts(setLoading, setPosts, pathParams.page, pathParams.postsPerPage)
         getPostComments(setPostComments, pathParams.id)
     }, [])
 
@@ -68,14 +70,14 @@ export default function Post() {
 
     const newComment = (
         <form onSubmit={submitComment}>
-                <input 
-                    name={'body'}
-                    value={form.body}
-                    onChange={onChange}
-                    placeholder={'escreva aqui seu comentário'}
-                    required
-                />
-                <button onClick={submitComment}>enviar</button>
+            <input
+                name={'body'}
+                value={form.body}
+                onChange={onChange}
+                placeholder={'escreva aqui seu comentário'}
+                required
+            />
+            <button onClick={submitComment}>enviar</button>
         </form>
     )
 
@@ -162,6 +164,7 @@ export default function Post() {
     const renderPostComments = () => postComments.map(comment => {
         return (
             <Comment
+                key={comment.id}
                 updateRender={updateRender}
                 comment={comment}
             />
@@ -170,20 +173,34 @@ export default function Post() {
 
 
     const updateRender = () => {
-        getPosts(setPosts, pathParams.page, pathParams.postsPerPage)
+        getPosts(setLoading, setPosts, pathParams.page, pathParams.postsPerPage)
         getPostComments(setPostComments, pathParams.id)
     }
 
+    const renderPage = () => {
+        return (
+            <PostDetailMainContainer>
+                {renderPostDetail(pathParams.id)}
+                <PostDetailNewCommentContainer>
+                    {newComment}
+                </PostDetailNewCommentContainer>
+                <GoBackButton onClick={goBack}>Voltar</GoBackButton>
+                <PostDetailBodyContainer>
+                    {renderPostComments().length > 0 ? renderPostComments() : 'Nenhum comentário'}
+                </PostDetailBodyContainer>
+            </PostDetailMainContainer>
+        )
+    }
+
+    const renderLoading = () => {
+        return (
+            <PostDetailMainContainer>
+                <HourglassTopIcon />
+            </PostDetailMainContainer>
+        )
+    }
+
     return (
-        <PostDetailMainContainer>
-            {renderPostDetail(pathParams.id)}
-            <PostDetailNewCommentContainer>
-                {newComment}
-            </PostDetailNewCommentContainer>
-            <GoBackButton onClick={goBack}>Voltar</GoBackButton>
-            <PostDetailBodyContainer>
-                {renderPostComments().length > 0 ? renderPostComments() : 'Nenhum comentário'}
-            </PostDetailBodyContainer>
-        </PostDetailMainContainer>
+        loading ? renderLoading() : renderPage()
     )
 }

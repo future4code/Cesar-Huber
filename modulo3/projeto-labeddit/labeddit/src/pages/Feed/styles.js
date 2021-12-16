@@ -8,6 +8,34 @@ export const FeedMainContainer = styled.div`
     align-items: center;
 `
 
+export const NotLoggedContainer = styled.div`
+    width: 100%;
+    min-width: 350px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h3{
+        color: ${COLORS.ePrimary};
+    }
+    h4{
+        color: ${COLORS.eDarkish};
+        font-weight: 300;
+    }
+`
+
+export const EmphasizedText1 = styled.span`
+    font-style: italic;
+    font-weight: 700;
+    color: ${COLORS.ePrimary};
+`
+
+export const EmphasizedText2 = styled.span`
+    font-style: italic;
+    font-weight: 700;
+    color: ${COLORS.eSecondary};
+`
+
 export const FeedSearchBarContainer = styled.div`
     margin: 5px;
     margin-bottom: 5px;

@@ -24,9 +24,10 @@ export const login = (body, goToFeed) => {
     })
 }
 
-export const getPosts = (setPosts, page, postsPerPage) => {
+export const getPosts = (setLoading, setPosts, page, postsPerPage) => {
     
     const token = localStorage.getItem('token')
+    setLoading(true)
 
     axios.get(`${BASE_URL}/posts?page=${page}&size=${postsPerPage}`, {
         headers: {
@@ -35,9 +36,11 @@ export const getPosts = (setPosts, page, postsPerPage) => {
     })
     .then((res) => {
         setPosts(res.data)
+        setLoading(false)
     })
     .catch((err) => {
         alert(err.response.data)
+        setLoading(false)
     })
 }
 
