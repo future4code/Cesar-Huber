@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getPosts, getPostComments } from '../../components/APIRequests'
-import { PostDetailMainContainer, PostDetailCommentContainer } from './styles'
+import { getPosts, getPostComments, createComment, createPostVote, changePostVote, deletePostVote } from '../../components/APIRequests'
+import { PostDetailMainContainer, PostDetailHeaderContainer, PostDetailNewCommentContainer, PostDetailBodyContainer, PostMainContainer, PostHeaderContainer, PostUserContainer, PostTitleContainer, PostBodyContainer, PostVoteContainer, PostSecondaryContainer } from './styles'
+import { GoBackButton } from '../Login/styles'
+import Avatar from '@mui/material/Avatar'
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import Comment from '../../components/Comment'
+import { COLORS } from '../../constants/styling'
+import { useForm } from '../../hooks/useForm'
 
 export default function Post() {
 
@@ -15,11 +22,62 @@ export default function Post() {
 
     const [posts, setPosts] = useState([])
     const [postComments, setPostComments] = useState([])
+    const [upVote, setUpVote] = useState(false)
+    const [downVote, setDownVote] = useState(false)
+    const {form, onChange, cleanFields} = useForm({
+        body: ''
+    })
 
     useEffect(() => {
         getPosts(setPosts, pathParams.page, pathParams.postsPerPage)
         getPostComments(setPostComments, pathParams.id)
     }, [])
+
+    const vote = (id, v) => {
+        const body = {
+            direction: v
+        }
+        if (v === 1 && !upVote && !downVote) {
+            setUpVote(true)
+            createPostVote(id, body, updateRender)
+        } else if (v === -1 && !upVote && !downVote) {
+            setDownVote(true)
+            createPostVote(id, body, updateRender)
+        } else if (v === 1 && upVote) {
+            setUpVote(false)
+            deletePostVote(id, updateRender)
+        } else if (v === -1 && downVote) {
+            setDownVote(false)
+            deletePostVote(id, updateRender)
+        } else if (v === 1 && downVote) {
+            setUpVote(true)
+            setDownVote(false)
+            changePostVote(id, body, updateRender)
+        } else {
+            setUpVote(false)
+            setDownVote(true)
+            changePostVote(id, body, updateRender)
+        }
+    }
+
+    const submitComment = (e) => {
+        e.preventDefault()
+        createComment(pathParams.id, form, updateRender)
+        cleanFields()
+    }
+
+    const newComment = (
+        <form onSubmit={submitComment}>
+                <input 
+                    name={'body'}
+                    value={form.body}
+                    onChange={onChange}
+                    placeholder={'escreva aqui seu comentário'}
+                    required
+                />
+                <button onClick={submitComment}>enviar</button>
+        </form>
+    )
 
     const renderPostDetail = (id) => posts.filter(post => {
         if (post.id === id) {
@@ -27,29 +85,105 @@ export default function Post() {
         }
     }).map(post => {
         return (
-            <PostDetailMainContainer key={post.id}>
-                <p>{post.id}</p>
-                <p>{post.title}</p>
-                <p>{post.body}</p>
-            </PostDetailMainContainer>
+            <PostDetailHeaderContainer key={post.id}>
+                <PostMainContainer>
+                    <PostVoteContainer>
+                        {upVote ?
+                            <ArrowCircleUpIcon
+                                onClick={() => { vote(post.id, 1) }}
+                                sx={{
+                                    cursor: 'pointer',
+                                    borderRadius: '5px',
+                                    color: `${COLORS.ePrimary}`,
+                                    "&:hover": {
+                                        bgcolor: 'rgba(224, 226, 219, .6)'
+                                    }
+                                }}
+                            />
+                            :
+                            <ArrowCircleUpIcon
+                                onClick={() => { vote(post.id, 1) }}
+                                sx={{
+                                    cursor: 'pointer',
+                                    borderRadius: '5px',
+                                    "&:hover": {
+                                        color: `${COLORS.ePrimary}`,
+                                        bgcolor: 'rgba(224, 226, 219, .6)'
+                                    }
+                                }}
+                            />
+                        }
+                        <p>{post.voteSum === null ? 0 : post.voteSum}</p>
+                        {downVote ?
+                            <ArrowCircleDownIcon
+                                onClick={() => { vote(post.id, -1) }}
+                                sx={{
+                                    cursor: 'pointer',
+                                    borderRadius: '5px',
+                                    color: `${COLORS.eSecondary}`,
+                                    "&:hover": {
+                                        bgcolor: 'rgba(224, 226, 219, .6)'
+                                    }
+                                }}
+                            />
+                            :
+                            <ArrowCircleDownIcon
+                                onClick={() => { vote(post.id, -1) }}
+                                sx={{
+                                    cursor: 'pointer',
+                                    borderRadius: '5px',
+                                    "&:hover": {
+                                        color: `${COLORS.eSecondary}`,
+                                        bgcolor: 'rgba(224, 226, 219, .6)'
+                                    }
+                                }}
+                            />
+                        }
+                    </PostVoteContainer>
+                    <PostSecondaryContainer>
+                        <PostHeaderContainer>
+                            <PostUserContainer>
+                                <Avatar>{post.username.charAt(0).toUpperCase()}</Avatar>
+                                <h4>{post.username}</h4>
+                            </PostUserContainer>
+                            <PostTitleContainer>
+                                <p>{post.title}</p>
+                            </PostTitleContainer>
+                        </PostHeaderContainer>
+                        <PostBodyContainer>
+                            <p>{post.body}</p>
+                        </PostBodyContainer>
+                    </PostSecondaryContainer>
+                </PostMainContainer>
+            </PostDetailHeaderContainer>
         )
     })
 
     const renderPostComments = () => postComments.map(comment => {
         return (
-            <PostDetailCommentContainer key={comment.id}>
-                <p>{comment.username}
-                | {comment.body}</p>
-            </PostDetailCommentContainer>
+            <Comment
+                updateRender={updateRender}
+                comment={comment}
+            />
         )
     })
 
+
+    const updateRender = () => {
+        getPosts(setPosts, pathParams.page, pathParams.postsPerPage)
+        getPostComments(setPostComments, pathParams.id)
+    }
+
     return (
         <PostDetailMainContainer>
-            Detalhes do Post + Comentários
-            <button onClick={goBack}>Voltar</button>
             {renderPostDetail(pathParams.id)}
-            {renderPostComments()}
+            <PostDetailNewCommentContainer>
+                {newComment}
+            </PostDetailNewCommentContainer>
+            <GoBackButton onClick={goBack}>Voltar</GoBackButton>
+            <PostDetailBodyContainer>
+                {renderPostComments().length > 0 ? renderPostComments() : 'Nenhum comentário'}
+            </PostDetailBodyContainer>
         </PostDetailMainContainer>
     )
 }

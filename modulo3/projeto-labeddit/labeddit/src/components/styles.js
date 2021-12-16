@@ -173,11 +173,12 @@ export const PostNewCommentContainer = styled.div`
         width: calc(100% - 40px);
         border: 1px solid ${COLORS.eSecondary};
         border-radius: 5px;
+        padding: 0 5px;
     }
     button{
+        cursor: pointer;
         width: 60px;
         text-align: center;
-        cursor: pointer;
         margin: 5px 10px;
         padding: 5px 10px;
         border: 1px solid ${COLORS.ePrimary};
@@ -189,4 +190,41 @@ export const PostNewCommentContainer = styled.div`
             color: ${COLORS.eWhiteish};
             font-weight: 400;
         }
+    }
+`
+
+export const CommentMainContainer = styled.div`
+    min-width: 350px;
+    width: 70%;
+    margin: 15px;
+    padding: 5px 10px;
+    border: 1px solid rgba(25, 23, 22, .9); 
+    box-shadow: 3px 3px 5px ${COLORS.eWhiteish};
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+`
+
+export const CommentUserContainer = styled.div`
+    width: 20%;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+`
+
+export const CommentBodyContainer = styled.div`
+    width: 60%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+`
+
+export const CommentVoteContainer = styled.div`
+    width: 20%;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 `

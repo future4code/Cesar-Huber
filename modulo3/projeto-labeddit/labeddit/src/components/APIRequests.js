@@ -143,3 +143,54 @@ export const deletePostVote = (id, updateRender) => {
         alert(err.response.data)
     })
 }
+
+export const createCommentVote = (id, body, updateRender) => {
+
+    const token = localStorage.getItem('token')
+
+    axios.post(`${BASE_URL}/comments/${id}/votes`, body, {
+        headers: {
+            Authorization: token
+        }
+    })
+    .then((res) => {
+        updateRender()
+    })
+    .catch((err) => {
+        alert(err.response.data)
+    })
+}
+
+export const changeCommentVote = (id, body, updateRender) => {
+
+    const token = localStorage.getItem('token')
+
+    axios.put(`${BASE_URL}/comments/${id}/votes`, body, {
+        headers: {
+            Authorization: token
+        }
+    })
+    .then((res) => {
+        updateRender()
+    })
+    .catch((err) => {
+        alert(err.response.data)
+    })
+}
+
+export const deleteCommentVote = (id, updateRender) => {
+
+    const token = localStorage.getItem('token')
+
+    axios.delete(`${BASE_URL}/comments/${id}/votes`, {
+        headers: {
+            Authorization: token
+        }
+    })
+    .then((res) => {
+        updateRender()
+    })
+    .catch((err) => {
+        alert(err.response.data)
+    })
+}

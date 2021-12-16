@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FeedMainContainer, FeedPageControlContainer, StyledNewPostForm, StyledPostButton, FeedPostsContainer } from './styles'
+import { FeedMainContainer, FeedSearchBarContainer, FeedPageControlContainer, StyledNewPostForm, StyledPostButton, FeedPostsContainer } from './styles'
 import { getPosts, createPost, getPostComments } from '../../components/APIRequests'
 import Post from '../../components/Post'
 import { useForm } from '../../hooks/useForm'
@@ -18,6 +18,7 @@ export default function Feed() {
     const [show, setShow] = useState(false)
     const [postsPerPage, setPostsPerPage] = useState(10)
     const [page, setPage] = useState(1)
+    const [searchFor, setSearchFor] = useState('')
 
     useEffect(() => {
         if (token !== null) {
@@ -37,7 +38,13 @@ export default function Feed() {
         body: ""
     })
 
-    const renderedPosts = () => posts.map(post => {
+    const renderedPosts = () => posts
+    .filter(post => {
+        if (post.username.includes(searchFor) || post.title.includes(searchFor) || post.body.includes(searchFor)) {
+            return post
+        }
+    })
+    .map(post => {
         return (
             <Post
                 key={post.id}
@@ -50,12 +57,15 @@ export default function Feed() {
         )
     })
 
+    const handleSearchBar = (e) => {
+        setSearchFor(e.target.value)
+    }
+
     const handlePostsPerPage = (e) => {
         setPostsPerPage(e.target.value)
     }
 
     const handlePage = (event, value) => {
-        console.log(value)
         setPage(value)
     }
 
@@ -71,7 +81,15 @@ export default function Feed() {
 
     return (
         <FeedMainContainer>
+            <FeedSearchBarContainer>
+                <input 
+                    placeholder='pesquisa' 
+                    onChange={handleSearchBar}
+                    value={searchFor}
+                />
+            </FeedSearchBarContainer>
             <StyledNewPostForm onSubmit={submitPost}>
+                <h3>Novo post</h3>
                 <input
                     name={'title'}
                     value={form.title}
@@ -90,7 +108,7 @@ export default function Feed() {
             </StyledNewPostForm>
 
             <FeedPageControlContainer>
-                <Pagination count={10} onChange={handlePage} />
+                <Pagination count={20} onChange={handlePage} />
                 <FormControl sx={{ m: 1, minWidth: 80 }}>
                     <InputLabel id="demo-simple-select-autowidth-label">#Posts</InputLabel>
                     <Select
