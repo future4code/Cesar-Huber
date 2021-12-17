@@ -12,7 +12,7 @@ export default function Router() {
             <Header />
             <Routes>
                 <Route path={'/'} element={<Feed />} />
-                <Route path={'/post/:page/:postsPerPage/:id'} element={<PostDetail />} />
+                <Route path={'/post/:page/:postsPerPage/:id/:uservote'} element={<PostDetail />} />
                 <Route path={'/login'} element={<Login />} />
                 <Route path={'/signup'} element={<Signup />} />
                 <Route path={'*'} element={<NotFound />} />

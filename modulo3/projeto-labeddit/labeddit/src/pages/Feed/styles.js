@@ -102,6 +102,30 @@ export const StyledNewPostForm = styled.form`
     }
 `
 
+export const NewPostFooter = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`
+
+export const StyledCharCount = styled.p`
+    margin: 5px 10px;
+    padding: 5px 10px;
+    align-self: flex-start;
+    color: ${COLORS.eGreyish};
+    font-size: 12px;
+`
+
+export const StyledCharCountOver = styled.p`
+    margin: 5px 10px;
+    padding: 5px 10px;
+    align-self: flex-start;
+    color: ${COLORS.ePrimary};
+    font-size: 12px;
+    font-weight: 700;
+`
+
 export const StyledPostButton = styled.button`
     align-self: flex-end;
     width: 60px;

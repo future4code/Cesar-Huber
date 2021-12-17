@@ -52,7 +52,7 @@ export const PostDetailNewCommentContainer = styled.div`
 
 export const PostDetailBodyContainer = styled.div`
     width: 100%;
-    height: calc(100vh - 300px);
+    height: calc(100vh - 370px);
     overflow: scroll;
     display: flex;
     flex-direction: column;
@@ -117,6 +117,8 @@ export const PostTitleContainer = styled.div`
 
 export const PostBodyContainer = styled.div`
     width: calc(100% - 20px);
+    height: 90px;
+    overflow: auto;
     padding: 10px;
     display: flex;
 `

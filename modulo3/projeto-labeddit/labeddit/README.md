@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Projeto Labeddit
+#### Desenvolvido por: Cesar Huber
+<hr>
+Link Surge: <a>https://political-rub.surge.sh/</a>
+<br><br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Objetivo
+Desenvolver um website responsivo que se assemelhe à rede social <i>reddit</i>. 
+<br>Objetivo alcançado: ✅
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+## Funcionalidades
+As principais funcionalidades a serem desenvolvidas e implementadas para considerar que o objetivo foi atingido foram:
+<li> Tela de Login com Autenticação e Autorização no Feed e detalhes do Post
+<li> Tela de Cadastro
+<li> Comunicação com a API via requisições
+<li> Sistema de Voto e Comentários, com contador para cada um
+<li> Adicionar comentário a um post
+<li> Visualizar os comentários de um post na tela de detalhe do post
+<br><br>
+<b><u>Funcionalidades extra implementadas:</u></b>
+<li> Paginação e seleção de posts por página via Material UI
+<li> Barra de busca que filtra posts por <i>nome de usuário</i>, <i>título</i> ou <i>conteúdo</i>
+<li> Funcionalidade de Logout
+<li> Loading em cada requisição
+<li> Registro salvo de voto do post e do comentário
+<li> Contador de caracteres para informar o usuário do limite de caracteres do post
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Como utilizar o site
+Primeiro, garanta que já tenha feito seu cadastro ou login, pois só será possível acessar o feed com as postagens e interações após o login. <br>
+Na página de feed, poderá buscar por algum usuário, título de post ou conteúdo de post na barra de busca. <br>
+Poderá também postar algo novo, informando um título e um conteúdo. Logo abaixo da área de texto, poderá acompanhar a quantidade de caracteres utilizada na sua postagem. O limite é de 255 caracteres. <br>
+Em cada um dos posts, pode votar up ou down, ou seja, curtir ou descurtir o post. Pode visualizar a somatória de votos no <i>footer</i> de cada post. Clicando no ícone de caixa de comentário, irá habilitar um novo campo na parte inferior do post para escrever um comentário neste post. <br>
+Clicando no <i>header</i> do post (usuário ou título), irá para o detalhe do post, onde será possível visualizar o próprio post, deixar um comentário neste post ou visualizar os demais comentários deixados por outros usuários. Além disso, continua possível votar no post e agora também poderá votar em algum comentário.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br>
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Tecnologias utilizadas
+<li> React JS
+<br> Bibliotecas:
+<li> styled-components
+<li> axios
+<li> material ui

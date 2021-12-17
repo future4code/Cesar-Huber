@@ -24,12 +24,12 @@ export const login = (body, goToFeed) => {
     })
 }
 
-export const getPosts = (setLoading, setPosts, page, postsPerPage) => {
+export const getPosts = (setLoading, setPosts, page, postsPerPage, userVote) => {
     
     const token = localStorage.getItem('token')
     setLoading(true)
 
-    axios.get(`${BASE_URL}/posts?page=${page}&size=${postsPerPage}`, {
+    axios.get(`${BASE_URL}/posts?page=${page}&size=${postsPerPage}&uservote=${userVote}`, {
         headers: {
             Authorization: token
         }
@@ -47,6 +47,7 @@ export const getPosts = (setLoading, setPosts, page, postsPerPage) => {
 export const createPost = (body, updateRender) => {
     
     const token = localStorage.getItem('token')
+    const caracteres = body.body.length
 
     axios.post(`${BASE_URL}/posts`, body, {
         headers: {
@@ -58,7 +59,12 @@ export const createPost = (body, updateRender) => {
         updateRender()
     })
     .catch((err) => {
-        alert(err.response.data)
+        if (err.response.status == 500) {
+            alert(`Seu post tem ${caracteres} caracteres. Reduza para o máximo de 255 caracteres.`)
+        } else {
+            alert(err.response.data)
+        }
+        
     })
 }
 

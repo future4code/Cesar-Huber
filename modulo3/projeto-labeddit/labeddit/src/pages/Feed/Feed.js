@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FeedMainContainer, NotLoggedContainer, FeedSearchBarContainer, FeedPageControlContainer, StyledNewPostForm, StyledPostButton, FeedPostsContainer, EmphasizedText1, EmphasizedText2 } from './styles'
+import { FeedMainContainer, NotLoggedContainer, FeedSearchBarContainer, FeedPageControlContainer, StyledNewPostForm, StyledPostButton, FeedPostsContainer, EmphasizedText1, EmphasizedText2, NewPostFooter, StyledCharCount, StyledCharCountOver } from './styles'
 import { getPosts, createPost, getPostComments } from '../../components/APIRequests'
 import Post from '../../components/Post'
 import { useForm } from '../../hooks/useForm'
@@ -109,7 +109,14 @@ export default function Feed() {
                         placeholder={'conteúdo'}
                         required
                     />
-                    <StyledPostButton onClick={submitPost}>postar</StyledPostButton>
+                    <NewPostFooter>
+                        {form.body.length < 256 ? 
+                            <StyledCharCount>Caracteres: {form.body.length}/255</StyledCharCount>
+                            :
+                            <StyledCharCountOver>Caracteres: {form.body.length}/255</StyledCharCountOver>
+                        }
+                        <StyledPostButton onClick={submitPost}>postar</StyledPostButton>
+                    </NewPostFooter>
                 </StyledNewPostForm>
 
                 <FeedPageControlContainer>
@@ -132,19 +139,12 @@ export default function Feed() {
                     </FormControl>
                 </FeedPageControlContainer>
                 <FeedPostsContainer>
-                    {renderedPosts()}
+                    {loading ? <HourglassTopIcon /> : renderedPosts()}
                 </FeedPostsContainer>
             </FeedMainContainer>
         )
     }
 
-    const renderLoading = () => {
-        return (
-            <FeedMainContainer>
-                <HourglassTopIcon />
-            </FeedMainContainer>
-        )
-    }
 
     const loginRequest = () => {
         return ( 
@@ -158,6 +158,6 @@ export default function Feed() {
     }
 
     return (
-        show ? (loading ? renderLoading() : renderPage()) : (loginRequest())
+        show ? renderPage() : loginRequest()
     )
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useProtectedPage } from '../../hooks/AuthenticationControl'
 import { getPosts, getPostComments, createComment, createPostVote, changePostVote, deletePostVote } from '../../components/APIRequests'
 import { PostDetailMainContainer, PostDetailHeaderContainer, PostDetailNewCommentContainer, PostDetailBodyContainer, PostMainContainer, PostHeaderContainer, PostUserContainer, PostTitleContainer, PostBodyContainer, PostVoteContainer, PostSecondaryContainer } from './styles'
 import { GoBackButton } from '../Login/styles'
@@ -12,6 +13,8 @@ import { useForm } from '../../hooks/useForm'
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 
 export default function Post() {
+    
+    useProtectedPage()
 
     const navigate = useNavigate()
 
@@ -31,9 +34,18 @@ export default function Post() {
     })
 
     useEffect(() => {
-        getPosts(setLoading, setPosts, pathParams.page, pathParams.postsPerPage)
+        getPosts(setLoading, setPosts, pathParams.page, pathParams.postsPerPage, pathParams.uservote)
         getPostComments(setPostComments, pathParams.id)
+        setInitialVote()
     }, [])
+
+    const setInitialVote = () => {
+        if (pathParams.uservote == 1) {
+            setUpVote(true)
+        } else if (pathParams.uservote == -1) {
+            setDownVote(true)
+        } 
+    }
 
     const vote = (id, v) => {
         const body = {

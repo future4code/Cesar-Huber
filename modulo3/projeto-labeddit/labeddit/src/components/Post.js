@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect } from 'react'
 import { PostMainContainer, PostHeaderContainer, PostUserContainer, PostTitleContainer, PostBodyContainer, PostFooterContainer, PostVoteContainer, PostCommentContainer, PostNewCommentContainer } from './styles'
 import Avatar from '@mui/material/Avatar';
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
@@ -9,7 +9,7 @@ import { createComment, createPostVote, changePostVote, deletePostVote } from '.
 import { useForm } from '../hooks/useForm';
 import { useNavigate } from 'react-router-dom'
 
-export default function Post(props) {
+export default function Post(props) { 
 
     const navigate = useNavigate()
     
@@ -19,6 +19,10 @@ export default function Post(props) {
     const {form, onChange, cleanFields} = useForm({
         body: ''
     })
+
+    useEffect(() => {
+        setInitialVote()
+    }, [])
 
     const toggleShowComment = () => {
         setShowComment(!showComment)
@@ -57,6 +61,14 @@ export default function Post(props) {
         }
     }
 
+    const setInitialVote = () => {
+        if (props.post.userVote === 1) {
+            setUpVote(true)
+        } else if (props.post.userVote === -1) {
+            setDownVote(true)
+        } 
+    }
+
     const renderNewComment = () => {
         return showComment ? 
         <PostNewCommentContainer>
@@ -76,7 +88,7 @@ export default function Post(props) {
     }
 
     const goToPostDetail = (id) => {
-        navigate(`/post/${props.page}/${props.postsPerPage}/${id}`)
+        navigate(`/post/${props.page}/${props.postsPerPage}/${id}/${props.post.userVote}`)
     }
 
     return (

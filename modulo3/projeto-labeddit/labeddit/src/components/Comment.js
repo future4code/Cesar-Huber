@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createCommentVote, changeCommentVote, deleteCommentVote } from '../components/APIRequests'
 import Avatar from '@mui/material/Avatar'
 import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp'
@@ -6,10 +6,22 @@ import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown'
 import { COLORS } from '../constants/styling'
 import { CommentMainContainer, CommentUserContainer, CommentBodyContainer, CommentVoteContainer } from './styles'
 
-export default function Comment(props) {
+export default function Comment(props) { 
 
     const [upVote, setUpVote] = useState(false)
     const [downVote, setDownVote] = useState(false)
+
+    useEffect(() => {
+        setInitialVote()
+    }, [])
+
+    const setInitialVote = () => {
+        if (props.comment.userVote === 1) {
+            setUpVote(true)
+        } else if (props.comment.userVote === -1) {
+            setDownVote(true)
+        } 
+    }
 
     const commentVote = (id, v) => {
         const body = {
