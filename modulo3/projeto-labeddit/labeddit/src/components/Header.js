@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import { HeaderMainContainer, HeaderLogoContainer, HeaderSecondaryContainer, HeaderUserContainer, HeaderSearchBarContainer, LoginButton, RegisterButton, LogoutButton } from './styles';
@@ -9,7 +9,6 @@ export default function Header(props) {
 
     const pathname = window.location.pathname
     const token = localStorage.getItem('token')
-    const [darkMode, setDarkMode] = useState(false)
 
     const goToLogin = () => {
         navigate('/login')
@@ -36,11 +35,15 @@ export default function Header(props) {
             </HeaderLogoContainer>
 
             <HeaderSearchBarContainer>
-                <input
-                    placeholder='pesquisa'
-                    onChange={props.handleSearchBar}
-                    value={props.searchFor}
-                />
+                {token !== null ?
+                    <input
+                        placeholder='pesquisa'
+                        onChange={props.handleSearchBar}
+                        value={props.searchFor}
+                    />
+                    :
+                    ''
+                }
             </HeaderSearchBarContainer>
             <HeaderUserContainer>
                 {token === null && pathname !== '/login' ? <LoginButton onClick={goToLogin}>Login</LoginButton> : ''}

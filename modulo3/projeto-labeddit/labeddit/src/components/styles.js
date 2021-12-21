@@ -77,7 +77,7 @@ export const LoginButton = styled.button`
     background-color: ${COLORS.white};
     color: ${COLORS.eDarkGrey};
     border-radius: 25px;
-    font-size: calc(12px + 4 * ((100vw - 350px) / 850));
+    font-size: calc(10px + 4 * ((100vw - 350px) / 850));
     &:hover{
         background-color: ${COLORS.eRed};
         color: ${COLORS.eLightGrey};
@@ -94,7 +94,7 @@ export const RegisterButton = styled.button`
     background-color: ${COLORS.white};
     color: ${COLORS.eDarkGrey};
     border-radius: 25px;
-    font-size: calc(12px + 4 * ((100vw - 350px) / 850));
+    font-size: calc(10px + 4 * ((100vw - 350px) / 850));
     &:hover{
         background-color: ${COLORS.eBlue};
         color: ${COLORS.eLightGrey};
@@ -111,7 +111,7 @@ export const LogoutButton = styled.button`
     background-color: ${COLORS.eLightGrey};
     color: ${COLORS.eDarkGrey};
     border-radius: 25px;
-    font-size: calc(12px + 4 * ((100vw - 350px) / 850));
+    font-size: calc(10px + 4 * ((100vw - 350px) / 850));
     &:hover{
         background-color: ${COLORS.eDarkGrey};
         color: ${COLORS.eLightGrey};
