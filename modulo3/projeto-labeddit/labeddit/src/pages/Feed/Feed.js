@@ -11,7 +11,7 @@ import Select from '@mui/material/Select';
 import HourglassTopIcon from '@mui/icons-material/HourglassTop';
 
 
-export default function Feed() {
+export default function Feed(props) {
 
     const token = localStorage.getItem('token')
 
@@ -19,7 +19,6 @@ export default function Feed() {
     const [posts, setPosts] = useState([])
     const [postsPerPage, setPostsPerPage] = useState(10)
     const [page, setPage] = useState(1)
-    const [searchFor, setSearchFor] = useState('')
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
@@ -34,7 +33,7 @@ export default function Feed() {
     useEffect(() => {
         if (token !== null) {
             updateRender()
-        } 
+        }
     }, [page, postsPerPage])
 
     const { form, onChange, cleanFields } = useForm({
@@ -42,27 +41,39 @@ export default function Feed() {
         body: ""
     })
 
-    const renderedPosts = () => posts
-        .filter(post => {
-            if (post.username.includes(searchFor) || post.title.includes(searchFor) || post.body.includes(searchFor)) {
-                return post
-            }
-        })
-        .map(post => {
+    const renderedPosts = () => {
+        if (posts
+            .filter(post => {
+                if (post.username.includes(props.searchFor) || post.title.includes(props.searchFor) || post.body.includes(props.searchFor)) {
+                    return post
+                }
+            }).length > 0) {
             return (
-                <Post
-                    key={post.id}
-                    post={post}
-                    getPostComments={getPostComments}
-                    updateRender={updateRender}
-                    page={page}
-                    postsPerPage={postsPerPage}
-                />
+                posts
+                    .filter(post => {
+                        if (post.username.includes(props.searchFor) || post.title.includes(props.searchFor) || post.body.includes(props.searchFor)) {
+                            return post
+                        }
+                    })
+                    .map(post => {
+                        return (
+                            <Post
+                                key={post.id}
+                                post={post}
+                                getPostComments={getPostComments}
+                                updateRender={updateRender}
+                                page={page}
+                                postsPerPage={postsPerPage}
+                            />
+                        )
+                    })
             )
-        })
-
-    const handleSearchBar = (e) => {
-        setSearchFor(e.target.value)
+        } else {
+            return (<div>
+                {'Não encontramos nenhum post com este filtro nesta página'}
+            </div>
+            )
+        }
     }
 
     const handlePostsPerPage = (e) => {
@@ -86,13 +97,6 @@ export default function Feed() {
     const renderPage = () => {
         return (
             <FeedMainContainer>
-                <FeedSearchBarContainer>
-                    <input
-                        placeholder='pesquisa'
-                        onChange={handleSearchBar}
-                        value={searchFor}
-                    />
-                </FeedSearchBarContainer>
                 <StyledNewPostForm onSubmit={submitPost}>
                     <h3>Novo post</h3>
                     <input
@@ -110,7 +114,7 @@ export default function Feed() {
                         required
                     />
                     <NewPostFooter>
-                        {form.body.length < 256 ? 
+                        {form.body.length < 256 ?
                             <StyledCharCount>Caracteres: {form.body.length}/255</StyledCharCount>
                             :
                             <StyledCharCountOver>Caracteres: {form.body.length}/255</StyledCharCountOver>
@@ -147,7 +151,7 @@ export default function Feed() {
 
 
     const loginRequest = () => {
-        return ( 
+        return (
             <FeedMainContainer>
                 <NotLoggedContainer>
                     <h3>Legal que você está aqui!</h3>

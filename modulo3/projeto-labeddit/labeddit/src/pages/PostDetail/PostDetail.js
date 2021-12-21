@@ -108,7 +108,7 @@ export default function Post() {
                                 sx={{
                                     cursor: 'pointer',
                                     borderRadius: '5px',
-                                    color: `${COLORS.ePrimary}`,
+                                    color: `${COLORS.eRed}`,
                                     "&:hover": {
                                         bgcolor: 'rgba(224, 226, 219, .6)'
                                     }
@@ -121,7 +121,7 @@ export default function Post() {
                                     cursor: 'pointer',
                                     borderRadius: '5px',
                                     "&:hover": {
-                                        color: `${COLORS.ePrimary}`,
+                                        color: `${COLORS.eRed}`,
                                         bgcolor: 'rgba(224, 226, 219, .6)'
                                     }
                                 }}
@@ -134,7 +134,7 @@ export default function Post() {
                                 sx={{
                                     cursor: 'pointer',
                                     borderRadius: '5px',
-                                    color: `${COLORS.eSecondary}`,
+                                    color: `${COLORS.eBlue}`,
                                     "&:hover": {
                                         bgcolor: 'rgba(224, 226, 219, .6)'
                                     }
@@ -147,7 +147,7 @@ export default function Post() {
                                     cursor: 'pointer',
                                     borderRadius: '5px',
                                     "&:hover": {
-                                        color: `${COLORS.eSecondary}`,
+                                        color: `${COLORS.eBlue}`,
                                         bgcolor: 'rgba(224, 226, 219, .6)'
                                     }
                                 }}

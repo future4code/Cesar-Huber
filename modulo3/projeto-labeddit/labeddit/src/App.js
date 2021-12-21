@@ -1,5 +1,6 @@
 import Router from "./routes/Router";
 import {createGlobalStyle} from 'styled-components'
+import { useState } from 'react'
 
 const GlobalStyle = createGlobalStyle`
   body{
@@ -12,10 +13,20 @@ const GlobalStyle = createGlobalStyle`
 `
 
 function App() {
+
+  const [searchFor, setSearchFor] = useState('')
+  
+  const handleSearchBar = (e) => {
+    setSearchFor(e.target.value)
+}
+
   return (
     <>
       <GlobalStyle />
-      <Router /> 
+      <Router 
+        searchFor={searchFor}
+        handleSearchBar={handleSearchBar}
+      /> 
     </>
   );
 }

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { COLORS } from '../../constants/styling'
 
 export const PostDetailMainContainer = styled.div`
-    margin-top: 60px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +28,7 @@ export const PostDetailNewCommentContainer = styled.div`
     }
     input{
         width: calc(100% - 40px);
-        border: 1px solid ${COLORS.eSecondary};
+        border: 1px solid ${COLORS.eBlue};
         border-radius: 5px;
         padding: 0 10px;
     }
@@ -38,13 +38,13 @@ export const PostDetailNewCommentContainer = styled.div`
         text-align: center;
         margin: 5px 10px;
         padding: 5px 10px;
-        border: 1px solid ${COLORS.ePrimary};
-        background-color: ${COLORS.eWhite};
-        color: ${COLORS.eDarkish};
+        border: 1px solid ${COLORS.eRed};
+        background-color: ${COLORS.white};
+        color: ${COLORS.eDarkGrey};
         border-radius: 25px;
         &:hover{
-            background-color: ${COLORS.ePrimary};
-            color: ${COLORS.eWhiteish};
+            background-color: ${COLORS.eRed};
+            color: ${COLORS.eLightGrey};
             font-weight: 400;
         }
     }
@@ -64,7 +64,7 @@ export const PostMainContainer = styled.div`
     min-width: 350px;
     width: 60%;
     border: 1px solid rgba(25, 23, 22, .9); 
-    box-shadow: 3px 3px 5px ${COLORS.eWhiteish};
+    box-shadow: 3px 3px 5px ${COLORS.eDarkGrey};
     border-radius: 10px;
     display: flex;
 `

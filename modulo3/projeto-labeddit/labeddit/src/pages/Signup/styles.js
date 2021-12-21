@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { COLORS } from '../../constants/styling'
 
 export const SignupMainContainer = styled.div`
-    margin-top: 60px;
+    margin-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,7 +10,7 @@ export const SignupMainContainer = styled.div`
 
 export const StyledTitle = styled.h2`
     margin: 15px;
-    color: ${COLORS.eDarkish};
+    color: ${COLORS.eDarkGrey};
 `
 
 export const StyledForm = styled.form`
@@ -29,18 +29,18 @@ export const InputsContainer = styled.div`
 export const IndividualInputContainer = styled.div`
     display: flex;
     align-items: center;
-    color: ${COLORS.ePrimary};
+    color: ${COLORS.eRed};
 `
 
 export const StyledInputs = styled.input`
     width: 200px;
     height: 20px;
-    border: 1px solid ${COLORS.eSecondary};
+    border: 1px solid ${COLORS.eBlue};
     border-radius: 15px;
     margin: 8px;
     padding: 4px 15px;
     font-size: 12px;
-    box-shadow: 3px 3px 5px ${COLORS.eGreyish};
+    box-shadow: 3px 3px 5px ${COLORS.eDarkGrey};
     transition: ease-in-out, height .15s ease-in-out;
     &:focus{
         font-size: 14px;
@@ -53,13 +53,13 @@ export const SubmitButton = styled.button`
     cursor: pointer;
     margin: 5px 10px;
     padding: 5px 10px;
-    border: 1px solid ${COLORS.eSecondary};
-    background-color: ${COLORS.eWhite};
-    color: ${COLORS.eDarkish};
+    border: 1px solid ${COLORS.eBlue};
+    background-color: ${COLORS.white};
+    color: ${COLORS.eDarkGrey};
     border-radius: 25px;
     &:hover{
-        background-color: ${COLORS.eSecondary};
-        color: ${COLORS.eWhiteish};
+        background-color: ${COLORS.eBlue};
+        color: ${COLORS.eLightGrey};
         font-weight: 400;
     }
 `
@@ -70,13 +70,13 @@ export const GoBackButton = styled.button`
     cursor: pointer;
     margin: 5px 10px;
     padding: 5px 10px;
-    border: 1px solid ${COLORS.eDarkish};
-    background-color: ${COLORS.eWhite};
-    color: ${COLORS.eDarkish};
+    border: 1px solid ${COLORS.eDarkGrey};
+    background-color: ${COLORS.white};
+    color: ${COLORS.eDarkGrey};
     border-radius: 25px;
     &:hover{
-        background-color: ${COLORS.eDarkish};
-        color: ${COLORS.eWhiteish};
+        background-color: ${COLORS.eDarkGrey};
+        color: ${COLORS.eLightGrey};
         font-weight: 400;
     }
 `

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LoginMainContainer, StyledTitle, StyledForm, InputsContainer, StyledInputs, SubmitButton, GoBackButton, IndividualInputContainer } from './styles'
+import { LoginMainContainer, StyledTitle, StyledForm, InputsContainer, StyledInputs, SubmitButton, GoBackButton, IndividualInputContainer, StyledSignUpContainer } from './styles'
 import { useForm } from '../../hooks/useForm'
 import { login } from '../../components/APIRequests'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
@@ -16,6 +16,10 @@ export default function Login() {
 
     const goBack = () => {
         navigate(-1)
+    }
+
+    const goToSignup = () => {
+        navigate('/signup')
     }
 
     const { form, onChange, cleanFields } = useForm({
@@ -61,6 +65,9 @@ export default function Login() {
                 <SubmitButton onClick={submitLogin}>Login</SubmitButton>
             </StyledForm>
             <GoBackButton onClick={goBack}>Voltar</GoBackButton>
+            <StyledSignUpContainer>
+                Ainda não tem cadastro? <span onClick={goToSignup}>Cadastre-se</span>
+            </StyledSignUpContainer>
         </LoginMainContainer>
     )
 }

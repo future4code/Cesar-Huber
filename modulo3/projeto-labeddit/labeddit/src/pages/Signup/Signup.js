@@ -46,9 +46,9 @@ export default function Signup() {
                             value={form.username}
                             onChange={onChange}
                             placeholder='nome de usuário'
-                            required
                             pattern={'^.{5,20}'}
                             title={'O nome de usuário deve ter entre 5 e 20 caracteres.'}
+                            required
                         />
                     </IndividualInputContainer>
                     <IndividualInputContainer>
@@ -70,9 +70,9 @@ export default function Signup() {
                             value={form.password}
                             onChange={onChange}
                             placeholder='senha'
-                            required
                             pattern={'^.{8,30}'}
                             title={'A senha deve ter entre 8 e 30 caracteres.'}
+                            required
                         />
                     </IndividualInputContainer>
                 </InputsContainer>
