@@ -1,0 +1,16 @@
+{
+  "name": "exercicio1",
+  "version": "1.0.0",
+  "description": "exercicio 1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "node",
+    "package",
+    "json"
+  ],
+  "author": "Cesar Huber",
+  "license": "ISC"
+}

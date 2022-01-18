@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-import { HeaderMainContainer, HeaderLogoContainer, HeaderSecondaryContainer, HeaderUserContainer, HeaderSearchBarContainer, LoginButton, RegisterButton, LogoutButton } from './styles';
+import { HeaderMainContainer, HeaderLogoContainer, HeaderUserContainer, HeaderSearchBarContainer, LoginButton, RegisterButton, LogoutButton } from './styles';
 
 export default function Header(props) {
 
@@ -33,18 +33,21 @@ export default function Header(props) {
                 <SmartToyIcon />
                 <h2>Labeddit</h2>
             </HeaderLogoContainer>
+            
+            {pathname === '/' &&
+                <HeaderSearchBarContainer>
+                    {token !== null ?
+                        <input
+                            placeholder='pesquisa'
+                            onChange={props.handleSearchBar}
+                            value={props.searchFor}
+                        />
+                        :
+                        ''
+                    }
+                </HeaderSearchBarContainer>
+            }
 
-            <HeaderSearchBarContainer>
-                {token !== null ?
-                    <input
-                        placeholder='pesquisa'
-                        onChange={props.handleSearchBar}
-                        value={props.searchFor}
-                    />
-                    :
-                    ''
-                }
-            </HeaderSearchBarContainer>
             <HeaderUserContainer>
                 {token === null && pathname !== '/login' ? <LoginButton onClick={goToLogin}>Login</LoginButton> : ''}
                 {token === null && pathname === '/login' ? <RegisterButton onClick={goToSignup}>Cadastre-se</RegisterButton> : ''}
