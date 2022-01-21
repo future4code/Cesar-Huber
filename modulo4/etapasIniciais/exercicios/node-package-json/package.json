@@ -1,0 +1,25 @@
+{
+  "name": "aula-node",
+  "version": "1.0.0",
+  "description": "Primeira vez criando package.json",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/future4code/Cesar-Huber.git"
+  },
+  "keywords": [
+    "node",
+    "package",
+    "json",
+    "backend"
+  ],
+  "author": "Cesar Huber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/future4code/Cesar-Huber/issues"
+  },
+  "homepage": "https://github.com/future4code/Cesar-Huber#readme"
+}

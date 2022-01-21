@@ -44,14 +44,14 @@ export default function Feed(props) {
     const renderedPosts = () => {
         if (posts
             .filter(post => {
-                if (post.username.includes(props.searchFor) || post.title.includes(props.searchFor) || post.body.includes(props.searchFor)) {
+                if (post.username.toLowerCase().includes(props.searchFor.toLowerCase()) || post.title.toLowerCase().includes(props.searchFor.toLowerCase()) || post.body.toLowerCase().includes(props.searchFor.toLowerCase())) {
                     return post
                 }
             }).length > 0) {
             return (
                 posts
                     .filter(post => {
-                        if (post.username.includes(props.searchFor) || post.title.includes(props.searchFor) || post.body.includes(props.searchFor)) {
+                        if (post.username.toLowerCase().includes(props.searchFor.toLowerCase()) || post.title.toLowerCase().includes(props.searchFor.toLowerCase()) || post.body.toLowerCase().includes(props.searchFor.toLowerCase())) {
                             return post
                         }
                     })
