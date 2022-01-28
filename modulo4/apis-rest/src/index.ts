@@ -76,29 +76,13 @@ app.get('/users', (req: Request, res: Response) => {
     const userType: UserType = req.query.type as UserType
     const userName: string = req.query.name as string
 
-    if (!userName && !userType) {
-      res.status(200).send(users)
+    let result = users
 
-    } else if (!userName && userType) {
-      if (userType !== UserType.ADMIN && userType !== UserType.NORMAL) {
-        errorCode = 422
-        throw new Error('User type must be "ADMIN" or "NORMAL".')
-      }
+    if (userType) result = users.filter(user => user.type === userType)
 
-      const usersByType = users.filter(user => user.type === userType)
-
-      res.status(200).send(usersByType)
-
-    } else if (userName && !userType) {
-      const user: User | undefined = users.find(user => user.name === userName)
-      if (!user) {
-        errorCode = 404
-        throw new Error('User not found.')
-      }
-
-      res.status(200).send(user)
-
-    }
+    if (userName) result = users.filter(user => user.name.includes(userName))
+    
+    res.send(result)
     
   } catch (error: any) {
     res.status(errorCode).send({message: error.message})
