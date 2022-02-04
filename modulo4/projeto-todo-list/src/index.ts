@@ -133,16 +133,38 @@ app.post('/tasks', async (req: Request, res: Response): Promise<void> => {
   }
 })
 
+app.get('/tasks/delayed', async (req: Request, res: Response): Promise<void> => {
+  let errorCode = 400
+  try {
+
+    let result = {tasks: await connection
+      .select('P_todo_list_Tasks.id as taskId', 'title', 'description', 'due_date as dueDate', 'creator_user_id as creatorUserId', 'nickname as creatorUserNickname')
+      .from('P_todo_list_Tasks')
+      .join('P_todo_list_Users', 'P_todo_list_Tasks.creator_user_id', 'P_todo_list_Users.id')
+      .whereRaw(`due_date < CURDATE() AND status <> 'done'`)
+    }
+
+    for (let i of result.tasks) {
+      i.dueDate = dateToStringDate(i.dueDate)
+    }
+    
+    res.status(200).send(result)
+  } catch (error: any) {
+    res.status(errorCode).send({message: error.sqlMessage || error.message})
+  }
+})
+
 app.get('/tasks/:id', async (req: Request, res: Response): Promise<void> => {
   let errorCode = 400
   try {
     const id = req.params.id
 
-    const result = await connection
-      .select('P_todo_list_Tasks.id as task_id', 'title', 'description', `due_date`, 'status', 'creator_user_id', 'nickname as creator_user_nickname')
-      .from('P_todo_list_Tasks')
-      .leftJoin('P_todo_list_Users', 'P_todo_list_Tasks.creator_user_id', 'P_todo_list_Users.id')
-      .where('P_todo_list_Tasks.id', id)
+    let result =
+      await connection
+        .select('P_todo_list_Tasks.id as task_id', 'title', 'description', `due_date`, 'status', 'creator_user_id', 'nickname as creator_user_nickname')
+        .from('P_todo_list_Tasks')
+        .leftJoin('P_todo_list_Users', 'P_todo_list_Tasks.creator_user_id', 'P_todo_list_Users.id')
+        .where('P_todo_list_Tasks.id', id)
 
     if (!result || result === undefined || result.length === 0) {
       errorCode = 422
@@ -151,7 +173,14 @@ app.get('/tasks/:id', async (req: Request, res: Response): Promise<void> => {
 
     result[0].due_date = dateToStringDate(result[0].due_date)
 
-    res.status(200).send(result)
+    let assignedUsers =
+      await connection
+        .distinct('id', 'nickname')
+        .from('P_todo_list_Assigned_Users')
+        .join('P_todo_list_Users', 'P_todo_list_Assigned_Users.user_id', 'P_todo_list_Users.id')
+        .where('P_todo_list_Assigned_Users.task_id', id)
+
+    res.status(200).send({result, assignedUsers})
   } catch (error: any) {
     res.status(errorCode).send({ message: error.sqlMessage || error.message })
   }
@@ -184,13 +213,16 @@ app.get('/tasks', async (req: Request, res: Response): Promise<void> => {
   let errorCode = 400
   try {
     const creatorUserId: string = req.query.creatorUserId as string
+    const status: string = req.query.status as string
 
-    if (!creatorUserId) {
-      errorCode = 422
-      throw new Error('Favor verificar se o id do usuário criador da tarefa foi preenchido corretamente e tentar novamente.')
-    }
+    // if (!creatorUserId) {
+    //   errorCode = 422
+    //   throw new Error('Favor verificar se o id do usuário criador da tarefa foi preenchido corretamente e tentar novamente.')
+    // }
 
-    let result = {
+    let result = {tasks: await connection('P_todo_list_Tasks')}
+
+    if (creatorUserId) result = {
       tasks:
         await connection
           .select('P_todo_list_Tasks.id',
@@ -203,6 +235,21 @@ app.get('/tasks', async (req: Request, res: Response): Promise<void> => {
           .from('P_todo_list_Tasks')
           .leftJoin('P_todo_list_Users', 'P_todo_list_Tasks.creator_user_id', 'P_todo_list_Users.id')
           .where('P_todo_list_Tasks.creator_user_id', creatorUserId)
+    }
+
+    if (status) result = {
+      tasks: 
+        await connection
+          .select('P_todo_list_Tasks.id',
+            'title',
+            'description',
+            'due_date',
+            'status',
+            'creator_user_id',
+            'nickname')
+          .from('P_todo_list_Tasks')
+          .leftJoin('P_todo_list_Users', 'P_todo_list_Tasks.creator_user_id', 'P_todo_list_Users.id')
+          .where('status', status)
     }
 
     if (result.tasks.length > 0) {
@@ -220,19 +267,28 @@ app.get('/tasks', async (req: Request, res: Response): Promise<void> => {
 app.post('/tasks/assign', async (req: Request, res: Response): Promise<void> => {
   let errorCode = 400
   try {
-    const { task_id, user_id } = req.body
+    const { task_id, user_ids } = req.body
 
-    if (!task_id || !user_id) {
+    if (!task_id || !user_ids) {
       errorCode = 422
       throw new Error('Verifique se as informações necessárias foram preenchidas corretamente e tente novamente.')
     }
 
-    const assignedUsers: { task_id: string, user_id: string } = {
-      task_id,
-      user_id
-    }
+    // const check = await connection('P_todo_list_Assigned_Users').where('task_id', task_id)
 
-    await connection('P_todo_list_Assigned_Users').insert(assignedUsers)
+    // for (let i of check) {
+    //   console.log(user_ids.indexOf(i.user_ids))
+    //   console.log(i.user_id)
+    //   if (user_ids.indexOf(i.user_ids) > -1) {
+    //     console.log(user_ids.indexOf(i.user_ids))
+    //     i.user_ids.splice(user_ids.indexOf(i.user_ids), 1)
+    //   } 
+    // }
+
+    for (let i of user_ids) {
+      let user_id = i
+      await connection('P_todo_list_Assigned_Users').insert({task_id, user_id})
+    }
 
     res.status(201).send('Usuário atribuido com sucesso!')
   } catch (error: any) {
@@ -265,6 +321,48 @@ app.get('/tasks/:id/assigned', async (req: Request, res: Response): Promise<void
     res.status(errorCode).send({ message: error.sqlMessage || error.message })
   }
 })
+
+app.post('/tasks/status/edit', async (req: Request, res: Response): Promise<void> => {
+  let errorCode = 400
+  try {
+    const task_id: string = req.query.task_id as string
+    const new_status = req.query.new_status
+
+    if (!task_id || !new_status) {
+      errorCode = 422
+      throw new Error('Verifique se as informações de id da tarefa e novo status foram preenchidas corretamente e tente novamente.')
+    }
+
+    await connection('P_todo_list_Tasks').where('id', task_id).update({status: new_status})
+    
+    res.status(201).send('Status alterado com sucesso!')
+  } catch (error: any) {
+    res.status(errorCode).send({message: error.sqlMessage || error.message})
+  }
+})
+
+app.delete('/tasks/:taskId/assigned/:assignedUserId', async (req: Request, res: Response): Promise<void> => {
+  let errorCode = 400
+  try {
+    const taskId = req.params.taskId
+    const assignedUserId = req.params.assignedUserId
+
+    if (!taskId || !assignedUserId) {
+      errorCode = 422
+      throw new Error('Verifique se as informações de id da tarefa e do usuário desginado foram preenchidas corretamente e tente novamente.')
+    }
+
+    await connection('P_todo_list_Assigned_Users')
+      .whereRaw(`task_id = ? AND user_id = ?`, [taskId, assignedUserId])
+      .del()
+
+    res.status(200).send('Usuário removido da tarefa com sucesso.')
+  } catch (error: any) {
+    res.status(errorCode).send({message: error.sqlMessage || error.message})
+  }
+})
+
+
 
 // servidor
 const server = app.listen(process.env.PORT || 3003, () => {
