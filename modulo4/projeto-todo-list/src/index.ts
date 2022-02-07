@@ -295,11 +295,11 @@ app.post('/tasks/assign', async (req: Request, res: Response): Promise<void> => 
       throw new Error('Verifique se as informações necessárias foram preenchidas corretamente e tente novamente.')
     }
 
-    // const check = await connection.raw(`
-    //   SELECT distinct user_id, count(*) as times_assigned_to_same_task FROM P_todo_list_Assigned_Users
-    //   WHERE task_id = '${task_id}' AND user_id IN (${user_ids})
-    //   GROUP BY user_id
-    // `)
+    const check = await connection.raw(`
+      SELECT distinct user_id, count(*) as times_assigned_to_same_task FROM P_todo_list_Assigned_Users
+      WHERE task_id = '${task_id}' AND user_id IN (${user_ids})
+      GROUP BY user_id
+    `)
 
     // console.log(check[0])
 
