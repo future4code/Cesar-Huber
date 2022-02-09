@@ -1,0 +1,3 @@
+# Exercício Serviços Backend
+Criando um readme para criar o costume de subir um readme junto com o exercício/projeto/trabalho, etc...
+

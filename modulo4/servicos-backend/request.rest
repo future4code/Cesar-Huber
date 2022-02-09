@@ -1,0 +1,10 @@
+POST http://localhost:3003/users
+  ?cep=03360070
+  &email=g6e8k2i3m1o7e5d9@labenualunos.slack.com
+  &password=senhaboa123
+Content-Type: application/json
+
+{
+  "numero": 123,
+  "complemento": "Este é um complemento"
+}
