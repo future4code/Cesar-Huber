@@ -16,4 +16,4 @@ app.get('/products', getAllProducts)
 
 app.post('/purchases', addNewPurchase)
 
-app.get('/purchases/:user_id/purchases', getUserPurchases)
+app.get('/users/:user_id/purchases', getUserPurchases)

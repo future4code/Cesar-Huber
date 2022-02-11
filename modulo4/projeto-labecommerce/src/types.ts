@@ -5,6 +5,17 @@ export type User = {
   password: string
 }
 
+export type UserItemsPurchased = {
+  product_name: string,
+  quantity: string,
+  price: string
+}
+
+export type UsersPurchases = {
+  user: User,
+  itemsPurchased: UserItemsPurchased[]
+}
+
 export type Product = {
   id: string,
   name: string,
