@@ -12,8 +12,11 @@ export type UserItemsPurchased = {
 }
 
 export type UsersPurchases = {
-  user: User,
-  itemsPurchased: UserItemsPurchased[]
+  id: string,
+  name: string,
+  email: string,
+  password: string,
+  purchases: UserItemsPurchased[]
 }
 
 export type Product = {
