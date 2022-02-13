@@ -2,6 +2,7 @@
 Desenvolvedor: Cesar Huber
 
 API Doc: <br> https://documenter.getpostman.com/view/18385621/UVeNkMpU
+APP Heroku: <br> https://projeto-labecommerce.herokuapp.com/
 
 <hr>
 
