@@ -5,6 +5,9 @@ import { adminGetUserProfiles } from "./endpoints/adminGetUserProfiles"
 import { postRecipe } from "./endpoints/postRecipe"
 import { userLogin } from "./endpoints/userLogin"
 import { adminGetRecipes } from "./endpoints/adminGetRecipes"
+import { getRecipe } from "./endpoints/getRecipe"
+import { followUser } from "./endpoints/followUser"
+import { unfollowUser } from "./endpoints/unfollowUser"
 
 app.post('/user/signup', createUser)
 
@@ -18,6 +21,12 @@ app.get('/user', adminGetUserProfiles)
 
 app.post('/recipes', postRecipe)
 
+app.get('/recipes/:id', getRecipe)
+
 app.get('/recipes', adminGetRecipes)
 
-// app.post('/user/:userid/follow', followUser)
+app.post('/user/follow', followUser)
+
+app.put('/user/unfollow', unfollowUser)
+
+// app.get('/user/feed', getFeed)
