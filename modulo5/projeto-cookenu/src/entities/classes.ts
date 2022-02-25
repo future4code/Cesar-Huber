@@ -12,21 +12,28 @@ export class User {
     private role: ROLES
   ) {}
 
+  static toUserModel(data: any): User {
+    return new User(data.id, data.name, data.email, data.password, data.role)
+  }
+
   public getUserInfo() {
     return {
       id: this.id,
       name: this.name,
-      email: this.email,
-      role: this.role
+      email: this.email
     }
   }
 
-  public getHash() {
+  public getPassword() {
     return this.password
   }
 
   public getUserId() {
     return this.id
+  }
+
+  public getUserEmail() {
+    return this.email
   }
 
   public getUserRole() {

@@ -26,10 +26,7 @@ export const userLogin = async (req: Request, res: Response): Promise<void> => {
       throw new Error('User email not found')
     }
 
-    const plainText = userInfo.getHash()
-
-    console.log(plainText)
-    const isValidPassword = compareHash(password, userInfo.getHash())
+    const isValidPassword = await compareHash(password, userInfo.getPassword())
 
     if (!isValidPassword) {
       errorCode = 401
@@ -44,7 +41,6 @@ export const userLogin = async (req: Request, res: Response): Promise<void> => {
     )
 
     res.status(200).send(token)
-
   } catch (error: any) {
     res.status(errorCode).send({message: error.message || error.sqlMessage})
   }

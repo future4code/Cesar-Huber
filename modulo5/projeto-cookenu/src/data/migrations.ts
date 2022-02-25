@@ -2,7 +2,7 @@ import { connection } from "./connection"
 
 export const createSQLTables = async () => {
   await connection.raw(`
-    CREATE TABLE P_cookenu_Users (
+    CREATE TABLE IF NOT EXISTS P_cookenu_Users (
       id varchar(36) primary key,
       name varchar(255) not null,
       email varchar(255) unique not null,
@@ -12,7 +12,7 @@ export const createSQLTables = async () => {
   `)
 
   await connection.raw(`
-      CREATE TABLE P_cookenu_Recipes (
+      CREATE TABLE IF NOT EXISTS P_cookenu_Recipes (
         id varchar(36) primary key,
         user_id varchar(36) not null,
         title varchar(255) not null,
@@ -23,7 +23,7 @@ export const createSQLTables = async () => {
   `)
 
   await connection.raw(`
-        CREATE TABLE P_cookenu_Followers (
+        CREATE TABLE IF NOT EXISTS P_cookenu_Followers (
           id varchar(36) primary key,
           user_id varchar(36) not null,
           follows_id varchar(36) not null,
