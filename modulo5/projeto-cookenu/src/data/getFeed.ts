@@ -7,14 +7,15 @@ export const getFeed = async (user_id: string): Promise<Post[]> => {
     R.id,
     R.title, 
     R.description,
-    R.createdAt,
+    DATE_FORMAT(R.createdAt,'%d/%m/%Y') as createdAt,
     U.id as userId,
     U.name as userName
     FROM P_cookenu_Recipes R
     INNER JOIN P_cookenu_Followers F ON R.user_id = F.follows_id
     INNER JOIN P_cookenu_Users U ON F.follows_id = U.id
     WHERE F.user_id = '${user_id}'
+    ORDER BY R.createdAt DESC
   `)
 
-  return feed
+  return feed[0]
 }

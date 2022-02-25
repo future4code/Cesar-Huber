@@ -19,7 +19,7 @@ export const adminGetUserProfiles = async (req: Request, res: Response): Promise
 
     if (data.role.toUpperCase() !== ROLES.ADMIN) {
       errorCode = 401
-      throw new Error('Only ADMIN Users are allowed to access this information')
+      throw new Error('Only ADMIN users are allowed to access this information')
     }
 
     const usersResult = await getAllUsers()

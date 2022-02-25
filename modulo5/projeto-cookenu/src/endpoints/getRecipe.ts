@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { getRecipeById } from "../data/getRecipeById";
-import { getData } from "../services/tokenManager";
 
 export const getRecipe = async (req: Request, res: Response): Promise<void> => {
   let errorCode = 400
@@ -13,14 +12,12 @@ export const getRecipe = async (req: Request, res: Response): Promise<void> => {
       throw new Error('Token is required to be informed in headers authorization')
     }
 
-    const data = getData(token)
-
     if (!recipeId) {
       errorCode = 422
       throw new Error('Recipe ID is required for this request')
     }
 
-    const result = getRecipeById(recipeId)
+    const result = await getRecipeById(recipeId)
 
     if (!result) {
       errorCode = 404

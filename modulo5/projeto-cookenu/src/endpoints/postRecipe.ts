@@ -8,8 +8,8 @@ import { getData } from "../services/tokenManager";
 export const postRecipe = async (req: Request, res: Response): Promise<void> => {
   let errorCode = 400
   try {
-    const {title, description} = req.body
     const token = req.headers.authorization
+    const {title, description} = req.body
 
     if (!token) {
       errorCode = 401

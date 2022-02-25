@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { getFollower } from "../data/getFollower";
 import { getUserById } from "../data/getUserById";
 import { insertFollower } from "../data/insertFollower";
 import { Follower } from "../entities/types";
@@ -28,6 +29,13 @@ export const followUser = async (req: Request, res: Response): Promise<void> => 
     if (!userExists) {
       errorCode = 404
       throw new Error('User ID not found')
+    }
+
+    const isAlreadyFollowing = await getFollower(data.id, followId)
+
+    if (isAlreadyFollowing) {
+      errorCode = 409
+      throw new Error('User already being followed')
     }
 
     const id = generateId()
