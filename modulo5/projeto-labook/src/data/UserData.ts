@@ -45,11 +45,24 @@ export default class UserData extends BaseDatabase {
     }
   }
 
-  insertFriend = async (befriend: BefriendInputDTO) => {
+  friendshipExists = async (userId: string, friendId: string): Promise<boolean> => {
+
+    try {
+
+      const [checkFriendship] = await BaseDatabase
+        .connection(this.FRIENDS_TABLE)
+        .where({'user_id': userId, 'friend_id': friendId})
+      return checkFriendship
+    } catch (error) {
+      throw new Error('Could not check friendship status')
+    }
+  }
+
+  insertFriend = async (befriend: BefriendInputDTO, mutualBefriend: BefriendInputDTO) => {
     try {
       await BaseDatabase
         .connection(this.FRIENDS_TABLE)
-        .insert(befriend)
+        .insert([befriend, mutualBefriend])
     } catch (error) {
       throw new Error('Could not insert friendship into database')
     }
@@ -59,7 +72,11 @@ export default class UserData extends BaseDatabase {
     try {
       await BaseDatabase
         .connection(this.FRIENDS_TABLE)
-        .where({ user_id: userId, friend_id: friendId })
+        .where({ user_id: userId, friend_id: friendId } )
+        .del()
+      await BaseDatabase
+        .connection(this.FRIENDS_TABLE)
+        .where({ user_id: friendId, friend_id: userId } )
         .del()
     } catch (error) {
       throw new Error('Could not delete friendship from database')

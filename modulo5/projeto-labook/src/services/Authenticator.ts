@@ -11,18 +11,21 @@ export class Authenticator {
       payload,
       process.env.JWT_KEY as string,
       {
-        expiresIn: "24min"
+        expiresIn: "30min"
       }
     )
   }
 
   getTokenData = (
     token: string
-  ): authenticationData => {
+  ): any => {
     return jwt.verify(
       token,
-      process.env.JWT_KEY as string
-    ) as authenticationData
+      process.env.JWT_KEY as string,
+      (err, result) => {
+        if (err) return err.message
+        return result
+      }
+    )
   }
-
 }

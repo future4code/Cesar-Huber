@@ -5,7 +5,8 @@
 // para fins de fixação de aprendizado, não usarei clean architecture e sim arquitetura em camadas
 
 import UserData from "../data/UserData";
-import { LoginInputDTO, SignupInputDTO } from "../models/DTOs";
+import { BefriendInputDTO, LoginInputDTO, SignupInputDTO } from "../models/DTOs";
+import { Message } from "../models/Post";
 import User from "../models/User";
 import { Authenticator } from "../services/Authenticator";
 import { HashManager } from "../services/HashManager";
@@ -74,6 +75,57 @@ export default class UserBusiness {
     const token = this.authenticator.generateToken({id: isUserRegistered.id})
 
     return token
+  }
+
+  handleFriendStatus = async (token: string, friendId: string): Promise<Message> => {
+    if (!token) {
+      throw new Error('Token is needed in order to verify authorization')
+    }
+  
+    const data = this.authenticator.getTokenData(token)
+
+    if (data === 'jwt expired') {
+      throw new Error('Token expired. Please log in again.')
+    }
+    if (!data) {
+      throw new Error('Could not verify token data. Try logging in again.')
+    }
+    const userId = data.id
+
+    const userAuthorized = await this.userData.findById(userId)
+
+    if (!userAuthorized) {
+      throw new Error('User not authorized. Try logging in again.')
+    }
+
+    if (!friendId) {
+      throw new Error('Friend ID must be informed to handle friend status')
+    }
+
+    const friendshipExists = await this.userData.friendshipExists(userId, friendId)
+
+    let message = 'Befriended'
+
+    if (!friendshipExists) {
+      const id1 = this.idGenerator.generateId()
+      const id2 = this.idGenerator.generateId()
+      const befriend: BefriendInputDTO = {
+        id: id1,
+        user_id: userId,
+        friend_id: friendId
+      }
+      const mutualBefriend: BefriendInputDTO = {
+        id: id2,
+        user_id: friendId,
+        friend_id: userId
+      }
+      this.userData.insertFriend(befriend, mutualBefriend)
+    } else {
+      this.userData.deleteFriend(userId, friendId)
+      message = 'Unfriended'
+    }
+
+    return {message}
   }
 
 }

@@ -13,3 +13,7 @@ export default class Post {
     private type: TYPE
   ){}
 }
+
+export type Message = {
+  message: string
+}

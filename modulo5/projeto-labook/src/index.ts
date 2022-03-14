@@ -31,6 +31,16 @@ app.post('/user/signup', userController.signup)
 
 app.post('/user/login', userController.login)
 
+app.post('/user/friends', userController.handleFriendStatus)
+
 app.post('/post', postController.newPost)
 
+app.post('/post/:id/like', postController.handleLike)
+
+app.post('/post/:id/comment', postController.comment)
+
 app.get('/post/:id', postController.findPostById)
+
+app.get('/post/feed/:type/:page', postController.feedByType)
+
+app.get('/post/feed/:page', postController.feed)

@@ -36,9 +36,6 @@ export default class PostData extends BaseDatabase {
 
   insert = async (post: Post) => {
     try {
-      console.log(BaseDatabase
-        .connection(this.POSTS_TABLE)
-        .insert(post).toSQL().toNative())
       await BaseDatabase
         .connection(this.POSTS_TABLE)
         .insert(post)
@@ -104,6 +101,18 @@ export default class PostData extends BaseDatabase {
     }
   }
 
+  likeExists = async (postId: string, userId: string): Promise<boolean> => {
+    try {
+      const [checkLike] = await BaseDatabase
+        .connection(this.LIKES_TABLE)
+        .where({'post_id': postId, 'user_id': userId})
+
+      return checkLike
+    } catch (error: any) {
+      throw new Error('Could not check like')
+    }
+  }
+
   insertLike = async (like: LikeInputDTO) => {
     try {
       await BaseDatabase
@@ -128,7 +137,7 @@ export default class PostData extends BaseDatabase {
   insertComment = async (comment: CommentInputDTO) => {
     try {
       await BaseDatabase
-        .connection(this.LIKES_TABLE)
+        .connection(this.COMMENTS_TABLE)
         .insert(comment)
     } catch (error) {
       throw new Error('Could not insert comment into database')

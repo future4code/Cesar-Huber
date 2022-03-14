@@ -19,19 +19,19 @@ export type NewPostInputDTO = {
 
 export type LikeInputDTO = {
   id: string,
-  postId: string,
-  userId: string
+  post_id: string,
+  user_id: string
 }
 
 export type CommentInputDTO = {
   id: string,
-  postId: string,
-  userId: string,
+  post_id: string,
+  user_id: string,
   comment: string
 }
 
 export type BefriendInputDTO = {
   id: string,
-  userId: string,
-  friendId: string
+  user_id: string,
+  friend_id: string
 }
